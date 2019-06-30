@@ -149,6 +149,54 @@ const HelpIntentHandler = {
   },
 };
 
+const AnswerIntent = {
+  canHandle(handlerInput) {
+    // handle numbers only during a game
+    let isCurrentlyPlaying = false;
+    const request = handlerInput.requestEnvelope.request;
+    const attributesManager = handlerInput.attributesManager;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+
+    if (sessionAttributes.gameState &&
+      sessionAttributes.gameState === 'STARTED') {
+      isCurrentlyPlaying = true;
+    }
+
+    return isCurrentlyPlaying && request.type === 'IntentRequest' && request.intent.name === 'AnswerIntent';
+  },
+  async handle(handlerInput) {
+    const { requestEnvelope, attributesManager, responseBuilder } = handlerInput;
+
+    const guess = parseInt(requestEnvelope.request.intent.slots.number.value, 10);
+    const sessionAttributes = attributesManager.getSessionAttributes();
+    const target = sessionAttributes.guess;
+
+    if (guess > target) {
+      return responseBuilder
+        .speak(`${guess.toString()} is incorrect.`)
+        .reprompt('Try saying a smaller number.')
+        .getResponse();
+    } else if (guess < target) {
+      return responseBuilder
+        .speak(`${guess.toString()} is incorrect.`)
+        .reprompt('Please tell me the other items.')
+        .getResponse();
+    } else if (guess === target) {
+      sessionAttributes.gamesPlayed += 1;
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
+      return responseBuilder
+        .speak(`${guess.toString()} is correct! Time for round ${round.toString()}`)
+        .reprompt('Say yes to start a new game.')
+        .getResponse();
+    }
+    return handlerInput.responseBuilder
+      .speak('Sorry, I didn\'t get that. Please tell me your answers.')
+      .reprompt('Please Tell me what your answers are for this round.')
+      .getResponse();
+  },
+};
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
