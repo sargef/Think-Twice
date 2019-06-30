@@ -86,32 +86,34 @@ const LaunchRequestHandler = {
   },
 };
 
-const YesIntent = {
+const YesIntentHandler = {
   canHandle(handlerInput) {
-    // only start a new game if yes is said when not playing a game.
-    let isCurrentlyPlaying = false;
-    const request = handlerInput.requestEnvelope.request;
-    const attributesManager = handlerInput.attributesManager;
-    const sessionAttributes = attributesManager.getSessionAttributes();
-
-    if (sessionAttributes.gameState &&
-      sessionAttributes.gameState === 'STARTED') {
-      isCurrentlyPlaying = true;
-    }
-
-    return !isCurrentlyPlaying && request.type === 'IntentRequest' && request.intent.name === 'AMAZON.YesIntent';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.YesIntent'
+        || handlerInput.requestEnvelope.request.intent.name === 'BeginIntent');
   },
   handle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
-    const responseBuilder = handlerInput.responseBuilder;
-    const sessionAttributes = attributesManager.getSessionAttributes();
-
-    sessionAttributes.gameState = 'STARTED';
-    sessionAttributes.guessNumber = Math.floor(Math.random() * 101);
-
-    return responseBuilder
-      .speak('Great! Try saying a number to start the game.')
-      .reprompt('Try saying a number.')
+      
+    if (supportsAPL(handlerInput)) {
+      handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Yes.json'),
+            datasources: {
+              "shipCommanderData": {
+                "properties": {
+                  "video": VIDEO_URLS['Yes']
+                }
+              }
+            }
+        });
+    }
+      
+      
+    return handlerInput.responseBuilder
+      .speak(Yes)
+      .reprompt(Yes)
+      .withSimpleCard('Think Twice', Yes)
       .getResponse();
   },
 };
@@ -204,6 +206,7 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
+    YesIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
