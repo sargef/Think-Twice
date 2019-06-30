@@ -5,10 +5,10 @@ const ddbAdapter = require('ask-sdk-dynamodb-persistence-adapter');
 
 const SKILL_NAME = 'Think Twice';
 const ddbTableName = 'Think-Twice-Game';
-const FALLBACK_MESSAGE_DURING_GAME = " <voice name="Matthew> ` ${SKILL_NAME} can't help you with that question. ` </voice>";
-const FALLBACK_REPROMPT_DURING_GAME = "<voice name="Matthew> 'You have not given me any answers to this round yet. Please tell me your answers.'</voice>";
-const FALLBACK_MESSAGE_OUTSIDE_GAME = " <voice name="Matthew> ` ${SKILL_NAME} can't help you with that question. Please tell me your answers for this round. ` </voice>";
-const FALLBACK_REPROMPT_OUTSIDE_GAME = " <voice name="Matthew> Say yes to start the game or no to quit.' </voice>";
+const FALLBACK_MESSAGE_DURING_GAME = " <voice name='Matthew'> ` ${SKILL_NAME} can't help you with that question. ` </voice>";
+const FALLBACK_REPROMPT_DURING_GAME = "<voice name='Matthew'> 'You have not given me any answers to this round yet. Please tell me your answers.'</voice>";
+const FALLBACK_MESSAGE_OUTSIDE_GAME = " <voice name='Matthew'> ` ${SKILL_NAME} can't help you with that question. Please tell me your answers for this round. ` </voice>";
+const FALLBACK_REPROMPT_OUTSIDE_GAME = " <voice name='Matthew'> Say yes to start the game or no to quit.' </voice>";
 
 const VIDEO_URLS = {
   "OneRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/School+Swoop/SchooSwoopVid.mp4",
