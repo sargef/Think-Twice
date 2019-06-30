@@ -11,22 +11,19 @@ const FALLBACK_MESSAGE_OUTSIDE_GAME = " <voice name="Matthew> ` ${SKILL_NAME} ca
 const FALLBACK_REPROMPT_OUTSIDE_GAME = " <voice name="Matthew> Say yes to start the game or no to quit.' </voice>";
 
 const VIDEO_URLS = {
-  "OneRoundOne": "",
-  "TwoRoundOne": "",
-  "OneRoundTwo": "",
-  "TwoRoundTwo": "",
-  "OneRoundThree": "",
-  "TwoRoundThree": "",
-  "OneRoundFour": "",
-  "TwoRoundFour": "",
-  "OneRoundGold": "",
-  "TwoRoundGold": "",
-  "OneRoundSilver": "",
-  "TwoRoundSilver": "",
-  "OneRoundBronze": "",
-  "TwoRoundBronze": "",
-  "Home": "",
-  "Stop": ""
+  "OneRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/School+Swoop/SchooSwoopVid.mp4",
+  "TwoRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PartyTrick/Round1PartyTrickVid.mp4",
+  "OneRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ConcertMania/Round2ConcertMania.mp4",
+  "TwoRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ShoppingShark/Round2ShoppingShark.mp4",
+  "OneRoundThree": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/Round2PlanetaryAttackVid.mp4",
+  "TwoRoundThree": "https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashVid.mp4",
+  "OneRoundFour": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ChemistryQuiz/Round4ChemistryQuiz.mp4",
+  "TwoRoundFour": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealVid.mp4",
+  "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/GoldMedalWinnerVid.mp4",
+  "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/SilverMedalVid.mp4",
+  "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/BronzeMedalVid.mp4",
+  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Vids/WelcomeVid.mp4",
+  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeVid.mp4"
 };
 
 
