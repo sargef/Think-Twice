@@ -198,6 +198,73 @@ const AnswerIntent = {
   },
 };
 
+
+const guessModeHandlers = Alexa.CreateStateHandler(states.GUESSMODE, {
+    'NewSession': function () {
+        this.handler.state = '';
+        this.emitWithState('NewSession'); // Equivalent to the Start Mode NewSession handler
+    },
+    'WordsIntent': function () {
+        const wordString = categories.joinCategoryWords(this.attributes['categoryWords']);
+        const message = `Here are the words again: ${wordString}. `;
+        this.emit(':ask', message + CATEGORY_PROMPT, CATEGORY_AND_WORDS_PROMPT)
+    },
+    'CategoryGuessIntent': function () {
+        const self = this;
+        const guessCategory = this.event.request.intent.slots.Category.value;
+        const targetCategory = this.attributes["category"];
+        self.attributes['guessTries']++;
+        console.log('user guessed: ' + guessCategory);
+
+        if (guessCategory === undefined || guessCategory === "") {
+            self.emit("Unhandled");
+            return;
+        }
+
+        if (guessCategory.toLowerCase() === 'repeat the words') {
+            self.emit('WordsIntent');
+            return;
+        }
+        
+        if `${guessCategory} == {} $$ {} && {} && {};
+        this.emit(':ask',
+        `${guessCategory} is correct. You did it. You receive ${number} points. Let\'s move to round ${round}.);
+        } else {
+
+        const similarity = categories.getSimilarity(guessCategory, targetCategory);
+        if (similarity >= categories.SIMILARITY_THRESHOLD) {
+            // With a callback, use the arrow function to preserve the correct 'this' context
+            this.emit('Correct', () => {
+                if (similarity === 1.0) {
+                    let guesses = self.attributes['guessTries'];
+                    if (guesses > 1) {
+                        guesses += " guesses";
+                    } else {
+                        guesses += " guess";
+                    }
+                    this.emit(':ask',
+                        `${guessCategory} is exactly right! Well done. In only ${guesses}. ${NEW_GAME_PROMPT}`);
+                } else {
+                    this.emit(':ask',
+                        `${guessCategory}, hmm. Close enough! The exact category is ${targetCategory}. ` +
+                        `It took you ${self.attributes['guessTries']} guesses. ${NEW_GAME_PROMPT}`);
+                }
+            });
+        } else {
+            this.emit('Incorrect', guessCategory);
+        }
+    },
+    'GiveUpIntent': function () {
+        this.handler.state = states.STARTMODE;
+        this.attributes['gamesPlayed']++;
+        const message = `Your effort is commendable. The correct category was ${this.attributes['category']}. ${NEW_GAME_PROMPT}`;
+        this.emit(':ask', message, NEW_GAME_PROMPT);
+    },
+
+
+
+
+
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
