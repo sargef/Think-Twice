@@ -33,7 +33,7 @@
                         "width": "100vw",
                         "scale": "best-fill",
                         "autoplay": true,
-                        "source": "${payload.shipCommanderData.properties.video}",
+                        "source": "${payload.thinkTwiceData.properties.video}",
                         "repeatCount": -1
                     },
                     {
