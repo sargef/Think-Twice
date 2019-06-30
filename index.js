@@ -69,7 +69,7 @@ const LaunchRequestHandler = {
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./launch.json'),
             datasources: {
-              "shipCommanderData": {
+              "thinkTwiceData": {
                 "properties": {
                   "video": VIDEO_URLS['Home']
                 }
@@ -100,7 +100,7 @@ const YesIntentHandler = {
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./Yes.json'),
             datasources: {
-              "shipCommanderData": {
+              "thinkTwiceData": {
                 "properties": {
                   "video": VIDEO_URLS['Yes']
                 }
@@ -131,7 +131,7 @@ const HelpIntentHandler = {
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./Help.json'),
             datasources: {
-              "shipCommanderData": {
+              "thinkTwiceData": {
                 "properties": {
                   "video": VIDEO_URLS['Help']
                 }
@@ -166,7 +166,7 @@ const CancelAndStopIntentHandler = {
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./stop.json'),
             datasources: {
-              "shipCommanderData": {
+              "thinkTwiceData": {
                 "properties": {
                   "video": VIDEO_URLS['Stop']
                 }
