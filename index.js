@@ -23,7 +23,31 @@ const VIDEO_URLS = {
   "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/SilverMedalVid.mp4",
   "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/BronzeMedalVid.mp4",
   "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Vids/WelcomeVid.mp4",
-  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeVid.mp4"
+  "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/InstructionsVid.mp4",
+  "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesStartVid.mp4",
+  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeVid.mp4",
+  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpVid.mp4"
+};
+
+const AUDIO_URLS = {
+  "OneRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/School+Swoop/schooswoop1.mp3" + "https://thinktwice3.s3-eu-west-1.amazonaws.com/School+Swoop/schoolswoop2.mp3",
+  "TwoRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PartyTrick/Round1PartyTrickEntireSounds.mp3",
+  "OneRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ConcertMania/Round2ConcertManiaAllSounds.mp3",
+  "TwoRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ShoppingShark/Round2ShoppingSharkAll.mp3",
+  "OneRoundThree": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/Round3PlanetaryAttackAll.mp3",
+  "TwoRoundThree": "https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashPart1all.mp3"+ "https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashpart2all.mp3",
+  "OneRoundFour": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ChemistryQuiz/Round4ChemistryQuizAll.mp3",
+  "TwoRoundFour": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealPart1All.mp3" + "https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealAllpart2.mp3",
+  "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/GoldMedalAll.mp3",
+  "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/SilverMedalAll.mp3",
+  "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/BronzeMedalAll.mp3",
+  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Vids/WelcomeIntroEntiresounds.mp3",
+  "GameReprompt": "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/BeginReprompt.mp3",
+  "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/Instructions.mp3",
+  "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/StartYes.mp3",
+  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/StopCancel.mp3",
+  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/Help.mp3",
+  "HelpReprompt":"https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/BeginReprompt.mp3"
 };
 
 
