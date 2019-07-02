@@ -41,7 +41,7 @@ const AUDIO_URLS = {
   "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/GoldMedalAll.mp3",
   "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/SilverMedalAll.mp3",
   "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/BronzeMedalAll.mp3",
-  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Vids/WelcomeIntroEntiresounds.mp3",
+  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Vids/welcomeintroentiresounds.mp3",
   "GameReprompt": "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/BeginReprompt.mp3",
   "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/Instructions.mp3",
   "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/StartYes.mp3",
