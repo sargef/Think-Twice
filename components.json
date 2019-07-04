@@ -20,7 +20,7 @@
                 "myTeal": "#3FE5CE",
                 "myPink": "#E53FA9",
                 "myPurple": "#CE3FE5",
-                "myNavy": "#0E032F",
+                "myNavy": "#1774A9",
                 "myWhite": "#FDFDFD",
                 "myLightGray": "#DFE3E9",
                 "myGray": "#BCBEC8",
@@ -36,7 +36,7 @@
                 {
                     "type": "Container",
                     "width": "100vw",
-                    "height": "100vh",
+                    "height": "100vh"
                     "items": [
                         {
                             "type": "Frame",
@@ -144,7 +144,7 @@
                             "type": "Frame",
                             "width": "11.5vw",
                             "height": "7vh",
-                            "backgroundColor": "black",
+                            "backgroundColor": "Black",
                             "borderColor": "${color}",
                             "borderWidth": "1vh",
                             "borderRadius": "1vw",
