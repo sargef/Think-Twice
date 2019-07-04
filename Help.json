@@ -1,0 +1,155 @@
+{
+    "type": "APL",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+          "name": "alexa-layouts",
+          "version": "1.0.0"
+        },
+        {
+            "name": "components",
+            "version": "1.0",
+            "source": "https://raw.githubusercontent.com/alexa-labs/workshop-starship-enterprise/master/Step-4-Make-Money-with-In-Skill-Purchasing/space-components.json"
+        }
+    ],
+    "resources": [],
+    "styles": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "width": "100vw",
+                "height": "100vh",
+                "alignItems": "center",
+                "items": [
+                    {
+                        "type": "Video",
+                        "id": "myVideoPlayer",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "scale": "best-fill",
+                        "autoplay": true,
+                        "source": "${payload.thinkTwiceData.properties.video}",
+                        "repeatCount": -1
+                    },
+                    {
+                        "when": "${viewport.shape == 'round'}",
+                        "type": "AlexaTransportControls",
+                        "mediaComponentId": "myVideoPlayer",
+                        "primaryControlSize": "5vw",
+                        "secondaryControlSize": "5vw",
+                        "autoplay": "true",
+                        "position": "absolute"
+                    },
+                    {
+                        "when": "${viewport.shape != 'round'}",
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "alignItems": "center",
+                        "position": "absolute",
+                        "items": [
+                            {
+                                "type": "Windows"
+                            },
+                            {
+                                "type": "ControlPanel",
+                                "position": "absolute",
+                                "top": "75vh"
+                            },
+                            {
+                                "type": "Container",
+                                "width": "11.5vw",
+                                "height": "30vh",
+                                "position": "absolute",
+                                "top": "78vh",
+                                "left": "2vw",
+                                "items": [
+                                    {
+                                        "type": "MediumButton",
+                                        "title": "Instructions",
+                                        "color": "@myBlue",
+                                        "arguments": "instructions"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Container",
+                                "width": "65vw",
+                                "height": "40vh",
+                                "position": "absolute",
+                                "top": "64vh",
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "items": [
+                                    {
+                                        "type": "Container",
+                                        "width": "65vw",
+                                        "height": "20vh",
+                                        "alignItems": "center",
+                                        "justifyContent": "center",
+                                        "direction": "row",
+                                        "items": [
+                                          
+                                            {
+                                                "type": "LargeButton",
+                                                "title": "Home",
+                                                "color": "@myYellow",
+                                                "arguments": "home"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Frame",
+                                        "width": "65vw",
+                                        "height": "5vh",
+                                        "backgroundColor": "#1774A9",
+                                        "borderRadius": "1vw",
+                                        "item": {
+                                            "type": "Container",
+                                            "width": "65vw",
+                                            "height": "5vh",
+                                            "alignItems": "center",
+                                            "justifyContent": "center",
+                                            "items": [
+                                                {
+                                                    "type": "AlexaTransportControls",
+                                                    "mediaComponentId": "myVideoPlayer",
+                                                    "primaryControlSize": "2vw",
+                                                    "secondaryControlSize": "2vw",
+                                                    "autoplay": "true"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                                                       {
+                                "type": "Container",
+                                "width": "11.5vw",
+                                "height": "30vh",
+                                "position": "absolute",
+                                "top": "78vh",
+                                "left": "87vw",
+                                "items": [
+                                    {
+                                        "type": "MediumButton",
+                                        "title": "Help",
+                                        "color": "@myRed",
+                                        "arguments": "help"
+                                    }
+                                    
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
