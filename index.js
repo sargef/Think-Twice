@@ -16,8 +16,8 @@ const VIDEO_URLS = {
   "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/MedalsWithBack/BronzeMedalWithBack.mp4",
   "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/WelcomeWithBackEd.mp4",
   "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/InstructionsWithBackEd.mp4",
-  "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesStartVid.mp4",
-  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEd.mp4",
+  "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesPlayWithBack.mp4",
+  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/Goodbyewithbackandclip.mp4",
   "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
 };
 
