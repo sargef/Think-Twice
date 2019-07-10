@@ -8,12 +8,21 @@ const WELCOME_MESSAGE = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.
 const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/>";
 const HELP_MESSAGE = "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/Help.mp3";
 const HELP_REPROMPT = "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/BeginReprompt.mp3";
-const CORRECT_ANSWER = "Correct!";
-const INCORRECT_ANSWER = "Incorrect!";
+const CORRECT_ANSWER = "<say-as interpret-as='interjection'>Correct</say-as>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>";
+const INCORRECT_ANSWER = "<say-as interpret-as='interjection'>Incorrect</say-as>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>";
 const NEXT_QUESTION_MESSAGE = "";
 const CONGRATS_MESSAGE = "Congratulations, the trivia has ended!";
 const SCORE_IS_MESSAGE = "<voice name ='Matthew'>'Your score is %s. '</voice>";
 const STOP_MESSAGE = "<say-as interpret-as='interjection'>okey dokey</say-as><s> see you later </s>";
+
+///
+///['Booya', 'All righty', 'Bam', 'Bazinga', 'Bingo', 'Boom', 'Bravo', 'Cha Ching', 'Cheers', 'Dynomite', 'Hip hip hooray', 'Hurrah', 'Hurray', 'Huzzah', 'Oh dear.  Just kidding.  Hurray', 'Kaboom', 'Kaching', 'Oh snap', 'Phew','Righto', 'Way to go', 'Well done', 'Whee', 'Woo hoo', 'Yay', 'Wowza', 'Yowsa'];
+///['Argh', 'Aw man', 'Blarg', 'Blast', 'Boo', 'Bummer', 'Darn', "D'oh", 'Dun dun dun', 'Eek', 'Honk', 'Le sigh', 'Mamma mia', 'Oh boy', 'Oh dear', 'Oof', 'Ouch', 'Ruh roh', 'Shucks', 'Uh oh', 'Wah wah', 'Whoops a daisy', 'Yikes'];
+///function getCurrentScore(score, counter) { return "Your current score is " + score + " out of " + counter + ". "; }
+
+///function getFinalScore(score, counter) { return "Your final score is " + score + " out of " + counter + ". "; }
+
+////
 
 const questionArray = [
 //1 
@@ -23,54 +32,61 @@ const questionArray = [
        {"question":"<voice name='Matthew'>tell me the next item</voice>", "answer":"piano lessons" },
         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
 //2 
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ConcertMania/Round2ConcertManiaAllSounds.mp3' />", "answer": "" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-            {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-               {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ConcertMania/Round2ConcertManiaAllSounds.mp3' />", "answer": "Metallica" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Neil Diamond" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"The Beetles" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"The Wiggles" },
+           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Wet Wet Wet" },
+            {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Baby Animals" },
 //3
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/Round3PlanetaryAttackAll.mp3' />", "answer":"" },
-     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/Round3PlanetaryAttackAll.mp3' />", "answer":"Mercury" },
+     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Venus" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Earth" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Mars" },
+        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Saturn" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Uranus" },
+          {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Neptune" },
+           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Pluto" },
+  
 //4
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ChemistryQuiz/Round4ChemistryQuizAll.mp3' />", "answer":"" },
-     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ChemistryQuiz/Round4ChemistryQuizAll.mp3' />", "answer":"Hydrogen" },
+     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Helium" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Lithium" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Berrylium" },
+        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Boron" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Carbon" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Nitrogen" },
+          {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Oxygen" },
+           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Fleurine" },
+             {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Neon" },
 //5
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PartyTrick/Round1PartyTrickEntireSounds.mp3' />", "answer":"" },
-     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PartyTrick/Round1PartyTrickEntireSounds.mp3' />", "answer":"Timothy" },
+     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Miles" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Katie" },
 //6
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ShoppingShark/Round2ShoppingSharkAll.mp3' />", "answer":"" },
-     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ShoppingShark/Round2ShoppingSharkAll.mp3' />", "answer":"Lettuce" },
+     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Cucumber" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Tomato" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Bread" },
+        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Butter" },
 //7
     {"question":"<audio src='' />", "answer":"" },
-     {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashPart1all.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashpart2all.mp3' />", "answer":"" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+     {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashPart1all.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/DiaryDash/Round3DiaryDashpart2all.mp3' />", "answer":"Day Care" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"School" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"library" },
+        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Car Wash" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Newspaper" },
+          {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Florist" },
+           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Nursing Home" },
 //8
-    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealPart1All.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealAllpart2.mp3' />", "answer":"" },
-     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
-         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"woodwork" },
+    {"question":"<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealPart1All.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/Round4ApptAppealAllpart2.mp3' />", "answer":"Monday Piano" },
+     {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Wednesday play group" },
+      {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Saturday Car Wash" },
+       {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Friday Homeless Shelter" },
+        {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Tuesday Shoe Shopping" },
+         {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Thursday Wine Tasting" },
+          {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Sunday Beach" },
+           {"question":"<voice name='Matthew'>next item please</voice>", "answer":"Tuesday Work" },
 ];
 
 const VIDEO_URLS = {
@@ -91,6 +107,7 @@ const VIDEO_URLS = {
   "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEdside.mp4",
   "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
 };
+
 
 
   const LaunchRequestHandler = {
@@ -132,7 +149,6 @@ const VIDEO_URLS = {
   },
 };
 
-
 const DailyGameHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -162,7 +178,7 @@ const DailyGameHandler = {
     }
     if (answer){
       if (answer.toLowerCase() === correctAnswer) {
-        speechOutput = CORRECT_ANSWER;
+        speechOutput= CORRECT_ANSWER;
         if (currentQuestionCounter < questionArray.length-1){
           speechOutput = speechOutput + NEXT_QUESTION_MESSAGE + questionArray[currentQuestionCounter+1].question;
           correctAnswer = questionArray[currentQuestionCounter+1].answer;
@@ -175,6 +191,7 @@ const DailyGameHandler = {
           speechOutput = INCORRECT_ANSWER +" "+ speechOutput;
         }
     }
+
     // Saving correctAnswer and counter into session
     let previousAnswer = correctAnswer;
     sessionAttributes[currentIntent.name] = {currentQuestionCounter,previousAnswer};
@@ -189,9 +206,10 @@ const DailyGameHandler = {
   },
 };
 
-   // ////
+
    
 /////
+  
 ////
 
 /////
