@@ -98,9 +98,9 @@
                                           
                                             {
                                                 "type": "LargeButton",
-                                                "title": "Home",
+                                                "title": "Begin",
                                                 "color": "@myYellow",
-                                                "arguments": "home"
+                                                "arguments": "playgame"
                                             }
                                         ]
                                     },
