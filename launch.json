@@ -9,7 +9,8 @@
         },
         {
             "name": "components",
-            "version": "1.0"
+            "version": "1.0",
+            "source": "https://raw.githubusercontent.com/alexa-labs/workshop-starship-enterprise/master/Step-4-Make-Money-with-In-Skill-Purchasing/space-components.json"
         }
     ],
     "resources": [],
@@ -73,7 +74,7 @@
                                         "type": "MediumButton",
                                         "title": "Instructions",
                                         "color": "@myBlue",
-                                        "arguments": "analyze"
+                                        "arguments": "instructions"
                                     }
                                 ]
                             },
@@ -96,25 +97,9 @@
                                         "items": [
                                             {
                                                 "type": "LargeButton",
-                                                "title": "Young and Slick",
-                                                "color": "@myYellow",
-                                                "arguments": "beam",
-                                                "position": "absolute",
-                                                "left": "0vw"
-                                            },
-                                            {
-                                                "type": "LargeButton",
-                                                "title": "Return to Home",
-                                                "color": "@myTeal",
-                                                "arguments": "home"
-                                            },
-                                            {
-                                                "type": "LargeButton",
-                                                "title": "Wild and Wise",
-                                                "color": "@myPink",
-                                                "arguments": "warp",
-                                                "position": "absolute",
-                                                "right": "0vw"
+                                                "title": "Begin",
+                                                "color": "@myOrange",
+                                                "arguments": "Begin"
                                             }
                                         ]
                                     },
@@ -122,7 +107,7 @@
                                         "type": "Frame",
                                         "width": "65vw",
                                         "height": "5vh",
-                                        "backgroundColor": "@myNavy",
+                                        "backgroundColor": "#1774A9",
                                         "borderRadius": "1vw",
                                         "item": {
                                             "type": "Container",
@@ -155,7 +140,7 @@
                                         "type": "MediumButton",
                                         "title": "Help",
                                         "color": "@myRed",
-                                        "arguments": "checkLog"
+                                        "arguments": "help"
                                     }
                                     
                                 ]
