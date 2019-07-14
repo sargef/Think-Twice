@@ -10,11 +10,12 @@ module.exports = Object.freeze({
     WELCOME_BACK : "<voice name='Matthew'>'Welcome back to Think Twice, Memory Masters Game.'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/SoundEffects/start-game-countdown-02.mp3' />",
     WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters medals`</voice>",
     STARTED : [
-    "Let's get<say-as interpret-as='interjection'>'Started'</say-as><break strength='strong'/>",
-    "Let's<say-as interpret-as='interjection'>'Go'</say-as><break strength='strong'/>",
-    "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>",
-    "<say-as interpret-as='interjection'>'Introduction please'</say-as><break strength='strong'/>",
-    "Let's<say-as interpret-as='interjection'>'Play'</say-as><break strength='strong'/>"
+    "Let's get<say-as interpret-as='interjection'>'Started'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/funny-cartoon-cue.mp3' />",
+    "Let's<say-as interpret-as='interjection'>'Go'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/genie-magic.mp3' />",
+    "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/introduction-sound-02.mp3' />",
+        "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/ntroduction-sound-05.mp3' />",
+    "<say-as interpret-as='interjection'>'Introduction please'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/piano-intro-stinger-2-full.mp3' />",
+    "Let's<say-as interpret-as='interjection'>'Play'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/system-open-ding-3-full.mp3' />"
     ],
     //Game Play
     START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from the question'</voice>",
