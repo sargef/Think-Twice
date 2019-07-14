@@ -5,10 +5,17 @@ module.exports = Object.freeze({
 
     //Welcomes
     WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/welcomenn.mp3' />",
-    MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Start to play the game or ask for Instructions.'</voice>",
+    MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Begin to play the game or ask for Instructions.'</voice>",
     REPROMPT : "<voice name='Matthew'>''</voice>",
     WELCOME_BACK : "<voice name='Matthew'>'Welcome back to Think Twice, Memory Masters Game.'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/SoundEffects/start-game-countdown-02.mp3' />",
     WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters medals`</voice>",
+    STARTED : [
+    "Let's get<say-as interpret-as='interjection'>'Started'</say-as><break strength='strong'/>",
+    "Let's<say-as interpret-as='interjection'>'Go'</say-as><break strength='strong'/>",
+    "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>",
+    "<say-as interpret-as='interjection'>'Introduction please'</say-as><break strength='strong'/>",
+    "Let's<say-as interpret-as='interjection'>'Play'</say-as><break strength='strong'/>"
+    ],
     //Game Play
     START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from the question'</voice>",
     NEXT_QUESTION_PROMPT : "<voice name='Matthew'>'Lets now move to the next question.'</voice>",
@@ -16,10 +23,24 @@ module.exports = Object.freeze({
     CLUE_PROMPT : "<voice name='Matthew'>'Your clue is'</voice>",
     NO_CLUES_LEFT : "<voice name='Matthew'>'You have no clues left'</voice>",
     FOUR_QUESTIONS_COMPLETE : "<voice name='Matthew'>'You have completed this rounds questions'</voice>",
-    ROUND_COMPLETE_PROMPT : "<voice name='Matthew'><say-as interpret-as='interjection'>'Congratulations,'</say-as><break strength='strong'/>'you have now completed this round'</voice>",
+    ROUND_COMPLETE_PROMPT : "<say-as interpret-as='interjection'>'Congratulations,'</say-as><break strength='strong'/>'you have now completed this round'",
     PLAY_AGAIN_PROMPT : "<voice name='Matthew'>'Would you like to play again?'</voice>",
-    ANSWER_CORRECT_MESSAGE: "<voice name ='Matthew'><say-as interpret-as='interjection'>'Correct'</say-as><break strength='strong'/></voice>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
-    ANSWER_WRONG_MESSAGE:  "<voice name ='Matthew'><say-as interpret-as='interjection'>'Incorrect'</say-as><break strength='strong'/></voice>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    
+    ANSWER_CORRECT_MESSAGE: 
+    [ "<say-as interpret-as='interjection'>'Correct'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "That is<say-as interpret-as='interjection'>'Correct'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "That's <say-as interpret-as='interjection'>'right</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "<say-as interpret-as='interjection'>'Good job'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "<say-as interpret-as='interjection'>'Well done'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "<say-as interpret-as='interjection'>'Awesome'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>"
+    ],
+    ANSWER_WRONG_MESSAGE: 
+    [ "<say-as interpret-as='interjection'>'Is incorrect'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "<say-as interpret-as='interjection'>'Is not'</say-as>correct<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "<say-as interpret-as='interjection'>'Is not'</say-as>right<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "<say-as interpret-as='interjection'>'Is not'</say-as>quite what i'm looking for<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "<say-as interpret-as='interjection'>'Is not'</say-as>quite right<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>"
+    ],
     //Complete
     COMPLETED_ALL_LEVELS: "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3' />",
     COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
@@ -28,12 +49,18 @@ module.exports = Object.freeze({
     FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Think Twice can\'t help you with that. Try guessing the answer or ask for a clue.'</voice>",
     FALLBACK_REPROMPT_DURING_GAME : "<voice name='Matthew'>'Try guessing the question asked. Or Ask me for a clue.'</voice>",
     FALLBACK_MESSAGE_OUTSIDE_GAME : "<voice name='Matthew'>'Think Twice Memory Masters skill can\'t help you with that. You will be asked a Memory Question, then i will ask for you to tell me the items from memory. Please say play to start the game or ask for Instructions to learn more. What would you like to do?'</voice>",
-    FALLBACK_REPROMPT_OUTSIDE_GAME : "<voice name='Matthew'>Say Play to start the game or Rules to know the rules'</voice>",
+    FALLBACK_REPROMPT_OUTSIDE_GAME : "<voice name='Matthew'>Say Play to Begin the game or Instructions'</voice>",
     ERROR_HANDLER : "<voice name='Matthew'>'Sorry, I can't understand the command. Please say that again.'</voice>",
     //Finish
     FINISH : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/stopnn.mp3' />",
-    //Rules
+
     GAME_RULES : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/instructionsnn.mp3' />",
+       // "Alright, let me guide you through the basics of game.",
+        //"Battle of Brains, is unique way of creating interest among kids about the historic Indain battles in the form of multi level based game.",
+        //"In each level, first you will be provided with a overview of the specific battle and test your knowledge by asking set 4 questions.",
+       // "If you answer correctly, u fetch 25 points. you can use clues to guess the answer. for each clue 10 points will be deducted from 25.",
+       // "you need to score atleast 50 points to proceed to next level. if you score 60 you get 1 star, for 80 u get 2 stars and for all answers at first guess u fetch 3 stars along with advancing to next level.",      
+    //Rules
     GAME_RULES_REPROMPT : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />",
     GAME_PLAY_REPROMPT : [
       "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/gamerepromptfullsound.mp3' />",
@@ -176,7 +203,7 @@ module.exports = Object.freeze({
           "Round": "Planetary Attack",
           "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PlanetaryAttackSSVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/BronzeMedalNNNN.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/planetaryattackss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/planetaryattackss.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -242,12 +269,12 @@ module.exports = Object.freeze({
           "Round": "Chemistry Quiz",
           "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ChemistryQuizSSVideo.mp4",
           "Description": [
-            "<voice name='Matthew'>'Welcome to the final round for this category as a master'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/planetaryattackss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/chemistryquiz1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/chemistryquiztwoss.mp3' />",
           ],
           "Subquestion": [
             {   
               
-                "Question": "<voice name='Matthew'>'What was the boy doing that reminds you of this element?'</voice>", 
+                "Question": "<voice name='Matthew'>'What is the element that the little blue boy was giving you a hint about'</voice>", 
                 "Answer" : "Hydrogen",
                 "Clues": [
                     "The little alien blue boy was saying this to you",
@@ -264,7 +291,7 @@ module.exports = Object.freeze({
             },
              {
               "Question": "<voice name='Matthew'>'The little blue boy runs on this element'</voice>",
-              "Answer": "Lithum",
+              "Answer": "Lithium",
               "Clues": [
                 "This element makes things tick",
                 "this element can work with time"
@@ -302,14 +329,14 @@ module.exports = Object.freeze({
                 "This element starts with N",
                 "It was pink and yellow"
               ]
-            },
+            }
           ]
         },
-                 {
+          {
           "Round": "Party Trick",
           "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SilverMedalNNNN.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='' />"
           ],
           "Subquestion": [
             {   
@@ -360,7 +387,7 @@ module.exports = Object.freeze({
                 "She is rocking a baby in her arms",
                 "Her name is also letters"
               ]
-            },
+            }
           ]
         },
                  {
@@ -427,7 +454,7 @@ module.exports = Object.freeze({
                 "He was looking pretty cool",
                 "He said howdy, to you"
               ]
-            },
+            }
           ]
         },
                  {
@@ -488,13 +515,21 @@ module.exports = Object.freeze({
             },
         
             {
-              "Question": "<voice name='Matthew'>'Please tell me the seventh appointment. the day and item. Example. Sunday Surf Lessons'</voice>",
+              "Question": "<voice name='Matthew'>'Please tell me the seventh appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
               "Answer": "Sunday Beach outing",
               "Clues": [
                 "It skated across the sky",
                 "You felt the cool breeze across your face"
               ]
             },
+             {
+              "Question": "<voice name='Matthew'>'Please tell me the eighth and final appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
+              "Answer": "Tuedsay Work",
+              "Clues": [
+                "Black and white everywhere",
+                "You stand at a busy traffic light in the city and you must choose"
+              ]
+            }
           ]
         },
                  {
@@ -561,7 +596,7 @@ module.exports = Object.freeze({
                 "You mum lives there",
                 "Somewhere you go to visit elderly people"
               ]
-            },
+            }
           ]
         }
       ]
