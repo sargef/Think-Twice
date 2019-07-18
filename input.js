@@ -1,7 +1,7 @@
 module.exports = Object.freeze({
 
     SKILL_NAME : "Think Twice",
-    ddbTableName : 'Battle-of-Brains',
+    ddbTableName : 'think-twice-auz',
 
     //Welcomes
     WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/welcomenn.mp3' />",
