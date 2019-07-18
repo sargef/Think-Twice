@@ -1,21 +1,21 @@
 module.exports = Object.freeze({
 
     SKILL_NAME : "Think Twice",
-    ddbTableName : 'think-twice',
+    ddbTableName : 'Battle-of-Brains',
 
     //Welcomes
     WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/welcomenn.mp3' />",
     MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Begin to play the game or ask for Instructions.'</voice>",
     REPROMPT : "<voice name='Matthew'>''</voice>",
     WELCOME_BACK : "<voice name='Matthew'>'Welcome back to Think Twice, Memory Masters Game.'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/SoundEffects/start-game-countdown-02.mp3' />",
-    WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters medals`</voice>",
+    WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters achievement awards`</voice>",
     STARTED : [
-    "Let's get<say-as interpret-as='interjection'>'Started'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/funny-cartoon-cue.mp3' />",
-    "Let's<say-as interpret-as='interjection'>'Go'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/genie-magic.mp3' />",
-    "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/introduction-sound-02.mp3' />",
-        "Let's<say-as interpret-as='interjection'>'Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/ntroduction-sound-05.mp3' />",
-    "<say-as interpret-as='interjection'>'Introduction please'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/piano-intro-stinger-2-full.mp3' />",
-    "Let's<say-as interpret-as='interjection'>'Play'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/system-open-ding-3-full.mp3' />"
+    "Let's get<say-as interpret-as='interjection'>' Started'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/funny-cartoon-cue.mp3' />",
+    "Let's<say-as interpret-as='interjection'>' Go'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/genie-magic.mp3' />",
+    "Let's<say-as interpret-as='interjection'>' Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/introduction-sound-02.mp3' />",
+    "Let's<say-as interpret-as='interjection'>' Begin'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/ntroduction-sound-05.mp3' />",
+    "Introduction<say-as interpret-as='interjection'>'please'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/piano-intro-stinger-2-full.mp3' />",
+    "Let's<say-as interpret-as='interjection'>' Play'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/system-open-ding-3-full.mp3' />"
     ],
     //Game Play
     START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from the question'</voice>",
@@ -29,23 +29,24 @@ module.exports = Object.freeze({
     
     ANSWER_CORRECT_MESSAGE: 
     [ "<say-as interpret-as='interjection'>'Correct'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
-    "That is<say-as interpret-as='interjection'>'Correct'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
-    "That's <say-as interpret-as='interjection'>'right</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "That is <say-as interpret-as='interjection'>' Correct'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
+    "That's <say-as interpret-as='interjection'>' right</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
     "<say-as interpret-as='interjection'>'Good job'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
     "<say-as interpret-as='interjection'>'Well done'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>",
     "<say-as interpret-as='interjection'>'Awesome'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattswordmasterDING.mp3'/>"
     ],
     ANSWER_WRONG_MESSAGE: 
-    [ "<say-as interpret-as='interjection'>'Is incorrect'</say-as><break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
-    "<say-as interpret-as='interjection'>'Is not'</say-as>correct<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
-    "<say-as interpret-as='interjection'>'Is not'</say-as>right<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
-    "<say-as interpret-as='interjection'>'Is not'</say-as>quite what i'm looking for<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
-    "<say-as interpret-as='interjection'>'Is not'</say-as>quite right<break strength='strong'/>" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>"
+    [ 
+    "Is incorrect" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "Is not correct" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "Is not right" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "Is not quite what i'm looking for" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>",
+    "Is not quite right" + "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/mattswordmasterBOHBOH.mp3'/>"
     ],
     //Complete
     COMPLETED_ALL_LEVELS: "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3' />",
     COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
-    CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon.'</voice>",
+    CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon. Say Play to start the game over again or say stop.'</voice>",
     //Fallback
     FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Think Twice can\'t help you with that. Try guessing the answer or ask for a clue.'</voice>",
     FALLBACK_REPROMPT_DURING_GAME : "<voice name='Matthew'>'Try guessing the question asked. Or Ask me for a clue.'</voice>",
@@ -55,25 +56,21 @@ module.exports = Object.freeze({
     //Finish
     FINISH : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/stopnn.mp3' />",
 
-    GAME_RULES : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/instructionsnn.mp3' />",
-       // "Alright, let me guide you through the basics of game.",
-        //"Battle of Brains, is unique way of creating interest among kids about the historic Indain battles in the form of multi level based game.",
-        //"In each level, first you will be provided with a overview of the specific battle and test your knowledge by asking set 4 questions.",
-       // "If you answer correctly, u fetch 25 points. you can use clues to guess the answer. for each clue 10 points will be deducted from 25.",
-       // "you need to score atleast 50 points to proceed to next level. if you score 60 you get 1 star, for 80 u get 2 stars and for all answers at first guess u fetch 3 stars along with advancing to next level.",      
+    GAME_RULES : "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionsone.mp3" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionstwo.mp3' />",
+     
     //Rules
     GAME_RULES_REPROMPT : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />",
     GAME_PLAY_REPROMPT : [
       "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/gamerepromptfullsound.mp3' />",
       "<voice name ='Matthew'>'Please Say clue if you don't know the answer' </voice>"
     ],
-    //Question Data
-    INPUT_DATA : [
+     //Question Data
+    INPUT_DATA :[
         {
           "Round": "School Swoop",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/School+Swoop/SchoolSwoopWithBackEd.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswoop1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswooptwonn.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswoop1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/schoolswoopss.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -137,9 +134,9 @@ module.exports = Object.freeze({
         },
           {
           "Round": "Concert Mania",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/ConcertMania/ConcertManiaWithBackEd.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ConcertManiaSSVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/concertmaniann.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/concermaniatwoss.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -202,14 +199,14 @@ module.exports = Object.freeze({
         },
         {
           "Round": "Planetary Attack",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PlanetaryAttackSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/PlanetaryAttackVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/planetaryattackss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/planetaryattacklar.mp3' />"
           ],
           "Subquestion": [
             {   
               
-                "Question": "<voice name='Matthew'>'Tell me the largest planet in our solar system?</voice>", 
+                "Question": "<voice name='Matthew'>'Tell me the first planet from the story, it is closest to the sun and is also the smallest planet in our solar system?</voice>", 
                 "Answer" : "Mercury",
                 "Clues": [
                     "It's very hot",
@@ -217,7 +214,7 @@ module.exports = Object.freeze({
                 ]
             },
             {
-              "Question": "<voice name='Matthew'>'What is the smallest planet in our solar system'</voice>",
+              "Question": "<voice name='Matthew'>'What was the last planet from the story?'</voice>",
               "Answer": "Pluto",
               "Clues": [
                 "It is quick and slithery",
@@ -241,7 +238,7 @@ module.exports = Object.freeze({
               ]
             },
              {
-              "Question": "<voice name='Matthew'>'What is the beautiful female planet's name and second largest planet in our solar system?'</voice>",
+              "Question": "<voice name='Matthew'>'What is the beautiful female planet's name and second planet from the sun in our solar system?'</voice>",
               "Answer": "Venus",
               "Clues": [
                 "She was catching drips from Mercury",
@@ -254,6 +251,14 @@ module.exports = Object.freeze({
               "Clues": [
                 "Venus knocks on his door",
                 "A planet that also catches the attention of a beauitul planet"
+              ]
+            },
+                {
+              "Question": "<voice name='Matthew'>'What was the name of the planet with the bulging muscles. At 300 times bigger than earth, It is also the largest planet in our solar system?'</voice>",
+              "Answer": "Jupyter",
+              "Clues": [
+                "The planet that grunted at the lovely couple",
+                "He had a yellow t-shirt on with a python wrapped around his shoulders."
               ]
             },
             {
@@ -337,7 +342,7 @@ module.exports = Object.freeze({
           "Round": "Party Trick",
           "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/partytrickss.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -458,6 +463,73 @@ module.exports = Object.freeze({
             }
           ]
         },
+                {
+          "Round": "Diary Dash",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashSSVideo.mp4",
+          "Description": [
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/diarydash1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/skhykecI-diarydashtwoss.mp3' />"
+          ],
+          "Subquestion": [
+            {   
+              
+                "Question": "<voice name='Matthew'>'When you walk out your front door, you are reminded of this? Just tell me the name of the place'</voice>", 
+                "Answer" : "Day Care",
+                "Clues": [
+                    "Sucking dummies",
+                    "You need to drop off there"
+                ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'The 2nd place you need to visit is. Please just tell me the name of the place.'</voice>",
+              "Answer": "School",
+              "Clues": [
+                "You send your family members there",
+                "Your kids go there to learn"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'The 3rd place in your diary is? Please tell me the place only.'</voice>",
+              "Answer": "Library",
+              "Clues": [
+                "Up into the clouds",
+                "A place you borrow at"
+              ]
+            },
+              {
+              "Question": "<voice name='Matthew'>'Please tell me the 4th place in your diary? Just the name of the place.'</voice>",
+              "Answer": "Car Wash",
+              "Clues": [
+                "Two words",
+                "You clean with it"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'Tell me the 5th place in your diary. Just the name but four words'</voice>",
+              "Answer": "husbands work",
+              "Clues": [
+                "",
+                ""
+              ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'Tell me the 6th place in your diary. Just the name please.'</voice>",
+              "Answer": "Florist",
+              "Clues": [
+                "The old lady handed you some",
+                "smells of perfume"
+              ]
+            },
+        
+            {
+              "Question": "<voice name='Matthew'>'Please tell me the 7th and last place in your diary. Just the name and it is two words'</voice>",
+              "Answer": "Nursing Home",
+              "Clues": [
+                "You mum lives there",
+                "Somewhere you go to visit elderly people"
+              ]
+            }
+          ]
+        },
                  {
           "Round": "Appointment Appeal",
           "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/AppAppealVideo.mp4",
@@ -525,80 +597,14 @@ module.exports = Object.freeze({
             },
              {
               "Question": "<voice name='Matthew'>'Please tell me the eighth and final appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
-              "Answer": "Tuedsay Work",
+              "Answer": "Tuesday Work",
               "Clues": [
                 "Black and white everywhere",
                 "You stand at a busy traffic light in the city and you must choose"
               ]
             }
           ]
-        },
-                 {
-          "Round": "Diary Dash",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashSSVideo.mp4",
-          "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/diarydash1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashTwoSS.mp3' />"
-          ],
-          "Subquestion": [
-            {   
-              
-                "Question": "<voice name='Matthew'>'When you walk out your front door, you are reminded of this? Just tell me the name of the place'</voice>", 
-                "Answer" : "Day Care",
-                "Clues": [
-                    "Sucking dummies",
-                    "You need to drop off there"
-                ]
-            },
-            {
-              "Question": "<voice name='Matthew'>'The 2nd place you need to visit is. Please just tell me the name of the place.'</voice>",
-              "Answer": "School",
-              "Clues": [
-                "You send your family members there",
-                "Your kids go there to learn"
-              ]
-            },
-             {
-              "Question": "<voice name='Matthew'>'The 3rd place in your diary is? Please tell me the place only.'</voice>",
-              "Answer": "Library",
-              "Clues": [
-                "Up into the clouds",
-                "A place you borrow at"
-              ]
-            },
-              {
-              "Question": "<voice name='Matthew'>'Please tell me the 4th place in your diary? Just the name of the place.'</voice>",
-              "Answer": "Car Wash",
-              "Clues": [
-                "Two words",
-                "You clean with it"
-              ]
-            },
-             {
-              "Question": "<voice name='Matthew'>'Tell me the 5th place in your diary. Just the name but four words'</voice>",
-              "Answer": "newspaper to husbands work",
-              "Clues": [
-                "",
-                ""
-              ]
-            },
-            {
-              "Question": "<voice name='Matthew'>'Tell me the 6th place in your diary. Just the name please.'</voice>",
-              "Answer": "Florist",
-              "Clues": [
-                "The old lady handed you some",
-                "smells of perfume"
-              ]
-            },
-        
-            {
-              "Question": "<voice name='Matthew'>'Please tell me the 7th and last place in your diary. Just the name and it is two words'</voice>",
-              "Answer": "Nursing Home",
-              "Clues": [
-                "You mum lives there",
-                "Somewhere you go to visit elderly people"
-              ]
-            }
-          ]
         }
+         
       ]
 });
