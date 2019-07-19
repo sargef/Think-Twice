@@ -4,10 +4,11 @@
 const Alexa = require('ask-sdk-core');
 const ddbAdapter = require('ask-sdk-dynamodb-persistence-adapter'); 
 const input = require('./input');
+const Main = require('mainscreen.json');
 
 const VIDEO_URLS = {
-  "VideoAll": "",
-  "OneRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
+  "VideoAll": "https://thinktwice3.s3-eu-west-1.amazonaws.com/FullVideoThinkTwice.mp4",
+  "OneRoundOne":"https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
   "TwoRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
   "OneRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ConcertManiaSSVideo.mp4",
   "TwoRoundTwo": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ShoppingSharkSSVideo.mp4",
@@ -74,7 +75,7 @@ const LaunchRequestHandler = {
     let speechArr = []; 
     if(attributes.gamesPlayed > 0){
       speechArr.push(input.WELCOME_BACK);
-      speechArr.push(`You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters achievement awards`);
+      speechArr.push(`You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters medals`);
     }else{
       speechArr.push(input.WELCOME);
     }
@@ -101,7 +102,51 @@ const LaunchRequestHandler = {
   },
 };
 
+const RulesIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'RulesIntent';
+  },
+  async handle(handlerInput) {
+    let attributesManager = handlerInput.attributesManager;
+    let responseBuilder = handlerInput.responseBuilder;
+    let attributes = await attributesManager.getSessionAttributes();
+    let repromptArr = [];
+    repromptArr.push(input.GAME_RULES_REPROMPT);
+    let reprompt = await convertArrayToSpeech(repromptArr);
+    let speechText = await convertArrayToSpeech(input.GAME_RULES)+reprompt;
+    
+    attributes.gameState = 'RULES';
+    attributesManager.setSessionAttributes(attributes);
 
+    if (supportsDisplay(handlerInput)) {
+      let image = new Alexa.ImageHelper()
+        .getImage();
+      let bgImage = new Alexa.ImageHelper()
+        .getImage();
+      const bodyTemplate = 'BodyTemplate3';
+      responseBuilder.addRenderTemplateDirective({
+        type: bodyTemplate,
+        backButton: 'hidden',
+        backgroundImage: bgImage,
+        image
+      });
+    }
+
+    return responseBuilder
+      .speak(speechText)
+      .reprompt(reprompt)
+      .getResponse();
+  },
+};
+
+function resetGameIntent(attributesManager) {
+    const sessionAttributes = attributesManager.getSessionAttributes();
+    if (sessionAttributes.level>9) {
+        delete sessionAttributes.attributesManager;
+    }
+    return (attributesManager);
+}
 
 const PlayIntentHandler = {
   canHandle(handlerInput) {
@@ -118,26 +163,37 @@ const PlayIntentHandler = {
 
     return request.type === 'IntentRequest' && 
       (request.intent.name === 'PlayIntent' || 
-        (startGame && request.intent.name === 'YesIntent'));
+        (startGame && request.intent.name === 'YesIntent' 
+        || handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'));
     },
     async handle(handlerInput) {
     let { requestEnvelope, attributesManager} = handlerInput;
     let sessionAttributes = attributesManager.getSessionAttributes();
     sessionAttributes.gameState = 'PLAY';
+    
+    // Get the video to match the current level
+      if (requestEnvelope.type === 'Alexa.Presentation.APL.UserEvent') {
+      do { sessionAttributes.video.id === 3;}
+      while (sessionAttributes.level>1 ) ;
+      do {sessionAttributes.video.id === 2;}
+      while (sessionAttributes.level>2) ;
+      do {sessionAttributes.video.id === 3;}
+      while (sessionAttributes.level>3) ;
+      
+    }
+      
 
     let level = sessionAttributes.level;
     let speechText = '';
     let reprompt = '';
     let speechArr = [];
-    let Video = '';
-    
+
 
      if(level>input.INPUT_DATA.length){
       speechArr.push(input.COMPLETED_ALL_LEVELS);
       speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
       speechArr.push();
       speechText = await convertArrayToSpeech(speechArr);
-      Video = await convertArrayToVideo(VideoArr);
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
       sessionAttributes.endedSessionCount += 1;
@@ -145,31 +201,25 @@ const PlayIntentHandler = {
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
       
-      if (sessionAttributes.level>9 || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount>0)){
+      if (sessionAttributes.level>9 || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount+1)){
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
-      sessionAttributes.endedSessionCount = 0;
-      sessionAttributes.gamesPlayed = 0;
       sessionAttributes.level = 1;
       sessionAttributes.badge = 0;
       sessionAttributes.score = 0;
       attributesManager.setPersistentAttibutes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
     
-}
+  }
 
    if (supportsAPL(handlerInput)) {
         handlerInput.responseBuilder
         .addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./launch.json'),
-            datasources : {
-               "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['VideoAll'],
-                  }
-                 }
-              }
+            document: require('./Play.json'),
+            "source": ''
+          
+            
         });
     }
 
@@ -184,7 +234,6 @@ const PlayIntentHandler = {
         speechArr.push(`Your Level ${level.toString()} category is ${round.Round}`);
         speechArr.push(`${randomSpeech(input.STARTED)}`);
         speechText = await convertArrayToSpeech(speechArr)+await convertArrayToSpeech(round.Description);
-        Video = await convertArrayToVideo(VideoArr)+await convertArrayToVideo(round.VideoArray);
   
         speechArr = [];
         speechArr.push(input.START_ANSWERS_MESSAGE_PROMPT);
@@ -193,7 +242,6 @@ const PlayIntentHandler = {
         speechArr.push(`${round.Subquestion[question].Question}`);
         
         speechText = speechText + await convertArrayToSpeech(speechArr);
-        Video = Video + await convertArrayToVideo(VideoArr);
         reprompt = await convertArrayToSpeech(input.GAME_PLAY_REPROMPT);
         
         sessionAttributes.question = question;
@@ -210,7 +258,7 @@ const PlayIntentHandler = {
             speechArr.push(`${randomSpeech(input.ANSWER_CORRECT_MESSAGE)}`);
             let questionCount = sessionAttributes.questionCount;
             
-          if (questionCount <= 5){
+          if (questionCount <= 4){
           let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
       
               speechArr.push(input.NEXT_QUESTION_PROMPT);
@@ -248,7 +296,6 @@ const PlayIntentHandler = {
           speechArr.push(`Here is your question. ${round.Subquestion[question].Question}`);
         }
         speechText = await convertArrayToSpeech(speechArr);
-        Video = await convertArrayToVideo(VideoArr);
         reprompt = speechText;
 
       }
@@ -261,13 +308,8 @@ const PlayIntentHandler = {
         .addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./Play.json'),
-            datasources : {
-               "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['VideoAll'],
-                 }
-                }
-            }
+            "source": ''
+            
         });
     }
     return handlerInput.responseBuilder
@@ -277,7 +319,206 @@ const PlayIntentHandler = {
   },
 };
 
-////
+const CluesIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'CluesIntent';
+  },
+  async handle(handlerInput) {
+    let { attributesManager} = handlerInput;
+    let sessionAttributes = attributesManager.getSessionAttributes();
+    let speechText;
+    if(sessionAttributes.gameState === 'PLAY' || sessionAttributes.gameState === 'CLUES'){
+      let speechArr = await getClue(attributesManager, sessionAttributes);
+      speechText = await convertArrayToSpeech(speechArr);
+    }else{
+      speechText = input.EARLY_CLUE_PROMPT;
+    }
+    
+      if (supportsAPL(handlerInput)) {
+        handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./launch.json'),
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS['YesPlay'],
+                }
+              }
+            }
+        });
+    }
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt()
+      .getResponse();
+  },
+};
+
+const HelpIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'HelpIntent'
+
+      || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
+          && handlerInput.requestEnvelope.request.arguments.length > 0
+          && handlerInput.requestEnvelope.request.arguments[0] === 'help');
+  },
+  handle(handlerInput) {
+    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> ";
+    const reprompt = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />";
+
+    if (supportsAPL(handlerInput)) {
+      handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Help.json'),
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS['Help']
+                }
+              }
+            }
+        });
+    }
+    
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(reprompt)
+      .getResponse();
+  },
+};
+
+const InstructionsIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'InstructionsIntent'
+
+      || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
+          && handlerInput.requestEnvelope.request.arguments.length > 0
+          && handlerInput.requestEnvelope.request.arguments[0] === 'instructions');
+  },
+  handle(handlerInput) {
+    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/instructionsnn.mp3'/>";
+    const InstructionsReprompt = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />";
+
+    if (supportsAPL(handlerInput)) {
+      handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Instructions.json'),
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS['Instructions']
+                }
+              }
+            }
+        });
+    }
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(InstructionsReprompt)
+      .getResponse();
+  },
+};
+
+const StopHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'Stop'
+
+      || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
+          && handlerInput.requestEnvelope.request.arguments.length > 0
+          && handlerInput.requestEnvelope.request.arguments[0] === 'help');
+  },
+  handle(handlerInput) {
+    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> " ;
+  
+    
+    SessionEndedRequestHandler = true;
+
+    if (supportsAPL(handlerInput)) {
+      handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Stop.json'),
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS['Stop']
+                }
+              }
+            }
+        });
+    }
+    
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  },
+};
+
+const CancelAndStopIntentHandler = {
+  canHandle(handlerInput) {
+    let endGame = false;
+
+    const request = handlerInput.requestEnvelope.request;
+    const attributesManager = handlerInput.attributesManager;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+
+    if (sessionAttributes.gameState && 
+        (sessionAttributes.gameState === 'RULES'|| sessionAttributes.gameState === 'CLUES')) {
+      endGame = true;
+    }
+
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent') ||
+        (endGame && request.intent.name === 'AMAZON.NoIntent')
+        
+        || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
+        && handlerInput.requestEnvelope.request.arguments.length > 0
+        && handlerInput.requestEnvelope.request.arguments[0] === 'stop');
+  },
+  async handle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+
+    sessionAttributes.questionCount = 0;
+    sessionAttributes.endedSessionCount += 1;
+    sessionAttributes.gameState = 'ENDED';
+    attributesManager.setPersistentAttributes(sessionAttributes);
+    await attributesManager.savePersistentAttributes();
+
+    let speechArr = [];
+    speechArr.push(input.FINISH);
+
+
+    let speechText = input.FINISH;
+      if (supportsAPL(handlerInput)) {
+        handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Stop.json'),
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS['Stop'],
+                }
+              }
+            }
+        });
+    }
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .endGame(true)
+      .getResponse();
+  },
+};
+
 const StartOverRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -347,19 +588,9 @@ const NewGameIntentHandler = {
     let reprompt = '';
     let speechArr = [];
     let VIDEO_URL = [];
-
-      
-      if (sessionAttributes.level>1) {
-      sessionAttributes.questionCount = 0;
-      sessionAttributes.clueCount=0;
-      sessionAttributes.endedSessionCount = 0;
-      sessionAttributes.gamesPlayed = 0;
-      sessionAttributes.level = 1;
-      sessionAttributes.badge = 0;
-      sessionAttributes.score = 0;
-      attributesManager.setPersistentAttibutes(sessionAttributes);
+       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
-}
+
 
       let round = input.INPUT_DATA[level-1];
       if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || (sessionAttributes.questionCount == 0)){
@@ -409,7 +640,7 @@ const NewGameIntentHandler = {
                 sessionAttributes.badge += badge;
                 
                 speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to level "+ level);
-                speechArr.push("and You have won " +badge+ " achievement awards, your total achievement award count is "+sessionAttributes.badge);
+                speechArr.push("and You have won " +badge+ " medals, your total medal count is "+sessionAttributes.badge);
                 speechArr.push("Would you like to play level " +level+ "?");
       
                 sessionAttributes.level = level;
@@ -442,7 +673,7 @@ const NewGameIntentHandler = {
             datasources: {
               "thinkTwiceData": {
                 "properties": {
-                  "video": VIDEO_URLS['Home'],
+                  "video": VIDEO_URLS `${input.INPUT_DATA.Round}`,
 
                 }
               }
@@ -452,175 +683,6 @@ const NewGameIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(reprompt)
-      .getResponse();
-  },
-};
-
-
-////
-const CluesIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'CluesIntent';
-  },
-  async handle(handlerInput) {
-    let { attributesManager} = handlerInput;
-    let sessionAttributes = attributesManager.getSessionAttributes();
-    let speechText;
-    if(sessionAttributes.gameState === 'PLAY' || sessionAttributes.gameState === 'CLUES'){
-      let speechArr = await getClue(attributesManager, sessionAttributes);
-      speechText = await convertArrayToSpeech(speechArr);
-    }else{
-      speechText = input.EARLY_CLUE_PROMPT;
-    }
-    
-      if (supportsAPL(handlerInput)) {
-        handlerInput.responseBuilder
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./launch.json'),
-            datasources: {
-              "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['YesPlay'],
-                }
-              }
-            }
-        });
-    }
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt()
-      .getResponse();
-  },
-};
-
-
-
-
-const HelpIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'HelpIntent'
-
-      || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
-          && handlerInput.requestEnvelope.request.arguments.length > 0
-          && handlerInput.requestEnvelope.request.arguments[0] === 'help');
-  },
-  handle(handlerInput) {
-    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> ";
-    const reprompt = "";
-
-    if (supportsAPL(handlerInput)) {
-      handlerInput.responseBuilder
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./Help.json'),
-            datasources: {
-              "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['Help']
-                }
-              }
-            }
-        });
-    }
-    
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(reprompt)
-      .getResponse();
-  },
-};
-
-const InstructionsIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'InstructionsIntent'
-
-      || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
-          && handlerInput.requestEnvelope.request.arguments.length > 0
-          && handlerInput.requestEnvelope.request.arguments[0] === 'instructions');
-  },
-  handle(handlerInput) {
-    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionsone.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionstwo.mp3' />";
-    const InstructionsReprompt = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />";
-
-    if (supportsAPL(handlerInput)) {
-      handlerInput.responseBuilder
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./Instructions.json'),
-            datasources: {
-              "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['Instructions']
-                }
-              }
-            }
-        });
-    }
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(InstructionsReprompt)
-      .getResponse();
-  },
-};
-
-const CancelAndStopIntentHandler = {
-  canHandle(handlerInput) {
-    let endGame = false;
-
-    const request = handlerInput.requestEnvelope.request;
-    const attributesManager = handlerInput.attributesManager;
-    const sessionAttributes = attributesManager.getSessionAttributes();
-
-    if (sessionAttributes.gameState && 
-        (sessionAttributes.gameState === 'RULES'|| sessionAttributes.gameState === 'CLUES')) {
-      endGame = true;
-    }
-
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent') ||
-        (endGame && request.intent.name === 'AMAZON.NoIntent')
-        
-             
-        || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
-        && handlerInput.requestEnvelope.request.arguments.length > 0
-        && handlerInput.requestEnvelope.request.arguments[0] === 'stop');
-   
-  },
-  async handle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
-    const sessionAttributes = attributesManager.getSessionAttributes();
-
-    sessionAttributes.questionCount = 0;
-    sessionAttributes.endedSessionCount += 1;
-    sessionAttributes.gameState = 'ENDED';
-    attributesManager.setPersistentAttributes(sessionAttributes);
-    await attributesManager.savePersistentAttributes();
-
-    let speechArr = [];
-    speechArr.push(input.FINISH);
-
-    let speechText = input.FINISH;
-      if (supportsAPL(handlerInput)) {
-        handlerInput.responseBuilder
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./Stop.json'),
-            datasources: {
-              "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS['Stop'],
-                }
-              }
-            }
-        });
-    }
-    return handlerInput.responseBuilder
-      .speak(speechText)
       .getResponse();
   },
 };
@@ -762,7 +824,7 @@ async function getClue(attributesManager, sessionAttributes){
         sessionAttributes.badge += badge;
         
         speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to "+level+" level.");
-        speechArr.push("and You have won " +badge+ "medals, your total medal count is "+sessionAttributes.badge);
+        speechArr.push("and You have won " +badge+ " Achievement Awards, your total achievement award count is "+sessionAttributes.badge);
         speechArr.push("Do you want to play level "+level+"?");
 
         sessionAttributes.level = level;
@@ -778,6 +840,7 @@ async function getClue(attributesManager, sessionAttributes){
   return speechArr;
 }
 
+
 async function convertArrayToSpeech(textArray){
   let speechOutput = '';
   for (var i = 0; i < textArray.length;i++){
@@ -786,19 +849,11 @@ async function convertArrayToSpeech(textArray){
   return speechOutput;
 }
 
-async function convertArraytoVideo(Video){
-  let VideoArray = '';
-  for (var i = 0; i <Video.length;i++){
-    VideoArray = VideoArray + Video[i]+"";
+async function convertArraytoVideo(VideoArray){
+  let videoOutput = '';
+  for (var i = 0; i <VideoArray.length;i++){
+    videoOutput = videoOutput + VideoArray[i]+""
   }
-}
-
-async function convertArrayToText(textArray){
-  let textOutput = '';
-  for (var i = 0; i < textArray.length;i++){
-    textOutput = textOutput + textArray[i]+"<br/>";
-  }
-  return textOutput;
 }
 
 //DynamoDB Settings
@@ -815,18 +870,11 @@ function getPersistenceAdapter(tableName) {
   });
 }
 
-//Randomise Speech Answers
+//Randomise Question Answers
 function randomSpeech(speech_list){
   const rand = Math.floor(Math.random() * speech_list.length);
   
   return speech_list[rand];
-}
-
-//Randomise Speech Answers
-function answers(answers){
-  const rand = Math.floor(Math.random() * answers.length);
-  
-  return answers[rand];
 }
 
 //Use Display inclusion if just wanting to have display pictures for game (Code not included on intents for this skill)
@@ -846,18 +894,22 @@ function supportsAPL(handlerInput) {
     return aplInterface != null && aplInterface != undefined;
 }
 
+ 
+
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
   .withPersistenceAdapter(getPersistenceAdapter(input.ddbTableName))
   .addRequestHandlers(
     LaunchRequestHandler,
+    RulesIntentHandler,
     InstructionsIntentHandler,
     PlayIntentHandler,
     StartOverRequestHandler,
     NewGameIntentHandler,
     CluesIntentHandler,
     FallbackHandler,
+    StopHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
