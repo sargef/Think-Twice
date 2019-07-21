@@ -276,7 +276,7 @@ module.exports = Object.freeze({
         },
          {
           "Round": "Chemistry Quiz",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ChemistryQuizVIDEO.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ChemistryQuizProject.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/chemistryquiz1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/chemistryquiztwoss.mp3' />",
           ],
