@@ -4,7 +4,6 @@
 const Alexa = require('ask-sdk-core');
 const ddbAdapter = require('ask-sdk-dynamodb-persistence-adapter'); 
 const input = require('./input');
-// const Main = require('mainscreen.json');
 
 const VIDEO_URLS = {
   "VideoAll": "https://thinktwice3.s3-eu-west-1.amazonaws.com/FullVideoThinkTwice.mp4",
@@ -789,7 +788,7 @@ const FallbackHandler = {
     .reprompt(input.FALLBACK_REPROMPT_OUTSIDE_GAME)
     .getResponse();
     }
-    console.log('PLAY STEVE');
+    console.log('PLAY');
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
         .addDirective({
@@ -828,7 +827,7 @@ async function getClue(attributesManager, sessionAttributes){
     let questionCount = sessionAttributes.questionCount;
     speechArr.push(input.NO_CLUES_LEFT);
 
-   if (questionCount < 5){
+   if (questionCount < 4){
     let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
       
       speechArr.push(input.NEXT_QUESTION_PROMPT);
