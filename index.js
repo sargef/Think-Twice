@@ -13,7 +13,7 @@ const VIDEO_URLS_BY_ROUND_NAME = {
   "Shopping Shark": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ShoppingSharkVIDEO.mp4",
   "Planetary Attack": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PlanetaryAttackPROJECTX.mp4",
   "Diary Dash": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/DiaryDashVIDEO.mp4",
-  "Chemistry Quiz": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ChemistryQuizVIDEO.mp4",
+  "Chemistry Quiz": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ChemistryQuizProject.mp4",
   "Appointment Appeal": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ApptAppealVIDEO.mp4",
   "Gold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/GoldMedalWithFireworksVIDEO.mp4"
   };
