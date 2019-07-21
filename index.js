@@ -26,7 +26,7 @@ const VIDEO_URLS = {
   "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/InstructionsPro.mp4",
   "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesPlayWithBack.mp4",
   "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEdside.mp4",
-  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
+  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/HelpProject.mp4"
     };
 
 const AUDIO_URLS = {
