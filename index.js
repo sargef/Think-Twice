@@ -459,7 +459,7 @@ const StopHandler = {
     const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> " ;
   
     
-    SessionEndedRequestHandler = true;
+    // SessionEndedRequestHandler = true;
 
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
