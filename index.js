@@ -449,13 +449,15 @@ const StopHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'Stop'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+      || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.NoIntent')
 
       || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
           && handlerInput.requestEnvelope.request.arguments.length > 0
-          && handlerInput.requestEnvelope.request.arguments[0] === 'help');
+          && handlerInput.requestEnvelope.request.arguments[0] === 'stop');
   },
   handle(handlerInput) {
-    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> " ;
+    const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/stopnn.mp3'/> " ;
   
     
     // SessionEndedRequestHandler = true;
