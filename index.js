@@ -8,7 +8,7 @@ const input = require('./input');
 
 const VIDEO_URLS_BY_ROUND_NAME = {
   "School Swoop":"https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ProjectSchoolS.mp4",
-  "Party Trick": "hhttps://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/PartyTrickWithSilverMedalVIDEO.mp4",
+  "Party Trick": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PartyTrickWithSilverPRO.mp4",
   "Concert Mania": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ConcertManiaPROJECT.mp4",
   "Shopping Shark": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ShoppingSharkVIDEO.mp4",
   "Planetary Attack": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PlanetaryAttackPROJECTX.mp4",
