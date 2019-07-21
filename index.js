@@ -22,7 +22,7 @@ const VIDEO_URLS = {
   "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/MedalsWithBack/GoldMedalWithBack.mp4",
   "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SilverMedalNNVid.mp4",
   "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/BronzeMedalNNVid.mp4",
-  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/WelcomeWithBackEd.mp4",
+  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/WelcomeProject.mp4",
   "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/InstructionsPro.mp4",
   "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesPlayWithBack.mp4",
   "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEdside.mp4",
