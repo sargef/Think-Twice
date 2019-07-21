@@ -28,112 +28,14 @@
                 "alignItems": "center",
                 "items": [
                     {
-                        "when": "${'School Swoop'}",
                         "type": "Video",
                         "id": "1",
                         "height": "100vh",
                         "width": "100vw",
                         "scale": "best-fill",
                         "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
+                        "source": "${payload.thinkTwiceData.properties.video}",
                         "repeatCount": 2
-                    },
-                         {
-                        "when": "${'Concert mania'}",
-                        "type": "Video",
-                        "id": "2",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ConcertManiaSSVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Planetary Attack'}",
-                        "type": "Video",
-                        "id": "3",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/PlanetaryAttackVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Chemistry Quiz'}",
-                        "type": "Video",
-                        "id": "4",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ChemistryQuizSSVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Party Trick'}",
-                        "type": "Video",
-                        "id": "5",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Shopping Shark'}",
-                        "type": "Video",
-                        "id": "6",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ShoppingSharkSSVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Diary Dash'}",
-                        "type": "Video",
-                        "id": "8",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashSSVideo.mp4",
-                        "repeatCount": -1
-                    },
-                         {
-                        "when": "${'Appointment Appeal'}",
-                        "type": "Video",
-                        "id": "7",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/AppAppealVideo.mp4",
-                        "repeatCount": -1
-                    },
-                        {
-                        "when": "${}",
-                        "type": "Video",
-                        "id": "myVideoPlayer",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "${payload.source}",
-                        "repeatCount": -1
-                    },
-                    {
-                        "when": "${viewport.shape == 'round'}",
-                        "type": "AlexaTransportControls",
-                        "mediaComponentId": "myVideoPlayer",
-                        "primaryControlSize": "5vw",
-                        "secondaryControlSize": "5vw",
-                        "autoplay": "true",
-                        "position": "absolute"
                     },
                     {
                         "when": "${viewport.shape != 'round'}",

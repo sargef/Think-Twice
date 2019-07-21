@@ -4,7 +4,7 @@
 const Alexa = require('ask-sdk-core');
 const ddbAdapter = require('ask-sdk-dynamodb-persistence-adapter'); 
 const input = require('./input');
-const Main = require('mainscreen.json');
+// const Main = require('mainscreen.json');
 
 const VIDEO_URLS = {
   "VideoAll": "https://thinktwice3.s3-eu-west-1.amazonaws.com/FullVideoThinkTwice.mp4",
@@ -25,6 +25,17 @@ const VIDEO_URLS = {
   "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEdside.mp4",
   "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
     };
+
+const VIDEO_URLS_BY_ROUND_NAME = {
+  "School Swoop":"https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
+  "Party Trick": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
+  "Concert Mania": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ConcertManiaSSVideo.mp4",
+  "Shopping Shark": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ShoppingSharkSSVideo.mp4",
+  "Planetary Attack": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/PlanetaryAttackVideo.mp4",
+  "Diary Dash": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashSSVideo.mp4",
+  "Chemistry Quiz": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ChemistryQuizSSVideo.mp4",
+  "Appointment Appeal": "https://thinktwice3.s3-eu-west-1.amazonaws.com/ApptAppeal/ApptAppealWithBackEd.mp4"
+  };
 
 const AUDIO_URLS = {
   "OneRoundOne": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswoop1nn.mp3" + "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/schoolswoopss.mp3",
@@ -213,13 +224,18 @@ const PlayIntentHandler = {
   }
 
    if (supportsAPL(handlerInput)) {
+        let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
         handlerInput.responseBuilder
         .addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./Play.json'),
-            "source": ''
-          
-            
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS_BY_ROUND_NAME[roundName],
+                }
+              }
+            }
         });
     }
 
@@ -302,14 +318,19 @@ const PlayIntentHandler = {
     }
     attributesManager.setSessionAttributes(sessionAttributes);
     
-
    if (supportsAPL(handlerInput)) {
+        let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
         handlerInput.responseBuilder
         .addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
             document: require('./Play.json'),
-            "source": ''
-            
+            datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS_BY_ROUND_NAME[roundName],
+                }
+              }
+            }
         });
     }
     return handlerInput.responseBuilder
@@ -438,7 +459,7 @@ const StopHandler = {
     const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helpnn.mp3'/> " ;
   
     
-    SessionEndedRequestHandler = true;
+    // SessionEndedRequestHandler = true;
 
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
@@ -768,6 +789,7 @@ const FallbackHandler = {
     .reprompt(input.FALLBACK_REPROMPT_OUTSIDE_GAME)
     .getResponse();
     }
+    console.log('PLAY STEVE');
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
         .addDirective({
