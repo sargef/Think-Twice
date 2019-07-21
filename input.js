@@ -3,13 +3,12 @@ module.exports = Object.freeze({
     SKILL_NAME : "Think Twice",
     ddbTableName : 'think-twice-auz',
 
-
-    //Welcomes
+  //Welcomes
     WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/welcomenn.mp3' />",
     MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Begin to play the game or ask for Instructions.'</voice>",
     REPROMPT : "<voice name='Matthew'>''</voice>",
     WELCOME_BACK : "<voice name='Matthew'>'Welcome back to Think Twice, Memory Masters Game.'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/SoundEffects/start-game-countdown-02.mp3' />",
-    WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master with ${attributes.badge.toString()} memory masters medals`</voice>",
+    WELCOME_BACK_POINTS_UPDATE : "<voice name='Matthew'> `You have played ${attributes.gamesPlayed.toString()} times and you are currently a Level ${attributes.level.toString()} Memory Master`</voice>",
     STARTED : [
     "Let's get<say-as interpret-as='interjection'>' Started'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/funny-cartoon-cue.mp3' />",
     "Let's<say-as interpret-as='interjection'>' Go'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/genie-magic.mp3' />",
@@ -47,10 +46,10 @@ module.exports = Object.freeze({
     //Complete
     COMPLETED_ALL_LEVELS: "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3' />",
     COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
-    CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon.'</voice>",
+    CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon. Say New game to start a new game or say stop to finish.'</voice>",
     //Fallback
     FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Think Twice can\'t help you with that. Try guessing the answer or ask for a clue.'</voice>",
-    FALLBACK_REPROMPT_DURING_GAME : "<voice name='Matthew'>'Try guessing the question asked. Or Ask me for a clue.'</voice>",
+    FALLBACK_REPROMPT_DURING_GAME : "<voice name='Matthew'>'Try guessing the question asked, if you get it wrong, i will give you a clue. You get 2 clues per question.'</voice>",
     FALLBACK_MESSAGE_OUTSIDE_GAME : "<voice name='Matthew'>'Think Twice Memory Masters skill can\'t help you with that. You will be asked a Memory Question, then i will ask for you to tell me the items from memory. Please say play to start the game or ask for Instructions to learn more. What would you like to do?'</voice>",
     FALLBACK_REPROMPT_OUTSIDE_GAME : "<voice name='Matthew'>Say Play to Begin the game or Instructions'</voice>",
     ERROR_HANDLER : "<voice name='Matthew'>'Sorry, I can't understand the command. Please say that again.'</voice>",
@@ -63,14 +62,14 @@ module.exports = Object.freeze({
     GAME_RULES_REPROMPT : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />",
     GAME_PLAY_REPROMPT : [
       "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/gamerepromptfullsound.mp3' />",
-      "<voice name ='Matthew'>'Please Say clue if you don't know the answer' </voice>"
+      "<voice name ='Matthew'>'If you don't know the answer, try to guess. You will get 2 clues per question if you get it wrong. </voice>"
     ],
      //Question Data
     INPUT_DATA : [
         {
           "Round": "School Swoop",
           "id" : 1,
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/SchoolSwoopSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/SchoolSwoopVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswoop1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/schoolswoopss.mp3' />"
           ],
@@ -137,7 +136,7 @@ module.exports = Object.freeze({
           {
           "Round": "Concert Mania",
           "id": 2,
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ConcertManiaSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ConcertManiaVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/concermaniatwoss.mp3' />"
           ],
@@ -203,7 +202,7 @@ module.exports = Object.freeze({
         {
           "Round": "Planetary Attack",
           "id": 3,
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/PlanetaryAttackVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PlanetaryAttackPROJECTX.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/planetaryattacklar.mp3' />"
           ],
@@ -277,7 +276,7 @@ module.exports = Object.freeze({
         },
          {
           "Round": "Chemistry Quiz",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ChemistryQuizSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ChemistryQuizVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/chemistryquiz1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/chemistryquiztwoss.mp3' />",
           ],
@@ -344,7 +343,7 @@ module.exports = Object.freeze({
         },
           {
           "Round": "Party Trick",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/PartyTrickSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/PartyTrickWithSilverMedalVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/partytrickss.mp3' />"
           ],
@@ -402,7 +401,7 @@ module.exports = Object.freeze({
         },
                  {
           "Round": "Shopping Shark",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/ShoppingSharkSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ShoppingSharkVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/shoppinsharkss.mp3' />"
           ],
@@ -469,7 +468,7 @@ module.exports = Object.freeze({
         },
                  {
           "Round": "Appointment Appeal",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/AppAppealVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ApptAppealVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/apptappeal1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/appappealtwoss.mp3' />"
           ],
@@ -544,7 +543,7 @@ module.exports = Object.freeze({
         },
                  {
           "Round": "Diary Dash",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/DiaryDashSSVideo.mp4",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/DiaryDashVIDEO.mp4",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/diarydash1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/skhykecI-diarydashtwoss.mp3' />"
           ],
@@ -607,6 +606,13 @@ module.exports = Object.freeze({
                 "Somewhere you go to visit elderly people"
               ]
             }
+          ]
+        },
+                      {
+          "Round": "Gold",
+          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/GoldMedalWithFireworksVIDEO.mp4",
+          "Description": [
+            "<audio src='' />"
           ]
         }
       ]
