@@ -7,26 +7,24 @@ const input = require('./input');
 
 
 const VIDEO_URLS_BY_ROUND_NAME = {
-  "School Swoop":"https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ProjectSchoolS.mp4",
-  "Party Trick": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PartyTrickWithSilverPRO.mp4",
-  "Concert Mania": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ConcertManiaPROJECT.mp4",
+  "School Swoop":"https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/SchoolSwoopVIDEO.mp4",
+  "Party Trick": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/PartyTrickWithSilverMedalVIDEO.mp4",
+  "Concert Mania": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ConcertManiaVIDEO.mp4",
   "Shopping Shark": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ShoppingSharkVIDEO.mp4",
-  "Planetary Attack": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/PlanetaryAttackPROJECTX.mp4",
+  "Planetary Attack": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/PlanetaryAttackWithBronzeMedalVIDEO.mp4",
   "Diary Dash": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/DiaryDashVIDEO.mp4",
-  "Chemistry Quiz": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/ChemistryQuizProject.mp4",
+  "Chemistry Quiz": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ChemistryQuizVIDEO.mp4",
   "Appointment Appeal": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/ApptAppealVIDEO.mp4",
   "Gold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/GoldMedalWithFireworksVIDEO.mp4"
   };
 
 const VIDEO_URLS = {
   "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/MedalsWithBack/GoldMedalWithBack.mp4",
-  "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SilverMedalNNVid.mp4",
-  "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/BronzeMedalNNVid.mp4",
-  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/WelcomeProject.mp4",
-  "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/InstructionsPro.mp4",
+  "Home": "https://thinktwice3.s3-eu-west-1.amazonaws.com/WelcomeAndStartReprompt/WelcomeWithBackEd.mp4",
+  "Instructions": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/InstructionsVideoNew.mp4",
   "YesPlay": "https://thinktwice3.s3-eu-west-1.amazonaws.com/YesPlay/YesPlayWithBack.mp4",
-  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/GoodbyeProject.mp4",
-  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEOALLLLLL/HelpProject.mp4"
+  "Stop": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Stop/GoodbyeWithBackEdside.mp4",
+  "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
     };
 
 const AUDIO_URLS = {
