@@ -27,13 +27,6 @@ const VIDEO_URLS = {
   "Help": "https://thinktwice3.s3-eu-west-1.amazonaws.com/Help/HelpWithBackEd.mp4"
     };
 
-const AUDIO_URLS = {
-
-  "RoundGold": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3",
-  "RoundSilver": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3",
-  "RoundBronze": "https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3",
-  };
-
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.session.new ||
@@ -281,7 +274,7 @@ const CluesIntentHandler = {
             datasources: {
               "thinkTwiceData": {
                 "properties": {
-                  "video": VIDEO_URLS['YesPlay'],
+                  "video": VIDEO_URLS['Home'],
                 }
               }
             }
@@ -675,7 +668,7 @@ const FallbackHandler = {
             datasources: {
               "thinkTwiceData": {
                 "properties": {
-                  "video": VIDEO_URLS['YesPlay'],
+                  "video": VIDEO_URLS['Home'],
 
                 }
               }
@@ -696,7 +689,7 @@ const FallbackHandler = {
             datasources: {
               "thinkTwiceData": {
                 "properties": {
-                  "video": VIDEO_URLS['YesPlay']
+                  "video": VIDEO_URLS['Home']
                 }
               }
             }
