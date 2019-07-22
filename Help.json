@@ -2,20 +2,244 @@
     "type": "APL",
     "version": "1.0",
     "theme": "dark",
-    "import": [
+    "import": [],
+    "resources": [
         {
-          "name": "alexa-layouts",
-          "version": "1.0.0"
+            "description": "Icon asset URLs for transport control icon buttons",
+            "when": "${@viewportProfile == @hubRoundSmall}",
+            "strings": {
+                "urlPlayIcon": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_play_default_48dp.png",
+                "urlPlayIconFocused": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_play_focused_48dp.png",
+                "urlPauseIcon": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_pause_default_48dp.png",
+                "urlPauseIconFocused": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_pause_focused_48dp.png"
+            }
         },
         {
-            "name": "components",
-            "version": "1.0",
-            "source": "https://raw.githubusercontent.com/alexa-labs/workshop-starship-enterprise/master/Step-4-Make-Money-with-In-Skill-Purchasing/space-components.json"
+            "description": "Icon asset URLs for transport control icon buttons",
+            "strings": {
+                "urlPlayIcon": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_play_default_72dp.png",
+                "urlPlayIconFocused": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_play_focused_72dp.png",
+                "urlPauseIcon": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_pause_default_72dp.png",
+                "urlPauseIconFocused": "https://s3.us-east-2.amazonaws.com/ryanwagn-fluid-assets/ic_transport_pause_focused_72dp.png"
+            }
         }
     ],
-    "resources": [],
-    "styles": {},
-    "layouts": {},
+    "styles": {
+        "highEmphasisIconButton": {
+            "description": "voice optimized icon button style - contained",
+            "values": [
+                {
+                    "backgroundColor": "rgba(#FAFAFA, .20)"
+                },
+                {
+                    "when": "${state.pressed}",
+                    "backgroundColor": "rgba(#FAFAFA, .30)"
+                },
+                {
+                    "when": "${state.focused}",
+                    "backgroundColor": "#EBEDED"
+                },
+                {
+                    "when": "${state.disabled}",
+                    "backgroundColor": "rgba(#FAFAFA, .20)"
+                }
+            ]
+        },
+        "lowEmphasisIconButton": {
+            "description": "voice optimized icon button style - image",
+            "values": [
+                {
+                    "backgroundColor": "rgba(#EBEDED, .17)"
+                },
+                {
+                    "when": "${state.pressed}",
+                    "backgroundColor": "rgba(#FAFAFA, .50)"
+                },
+                {
+                    "when": "${state.focused}",
+                    "backgroundColor": "#EBEDED"
+                },
+                {
+                    "when": "${state.disabled}",
+                    "backgroundColor": "transparent"
+                }
+            ]
+        },
+        "playPauseToggleButtonPauseImage": {
+            "description": "style for pause Image in the PlayPauseToggleButton layout",
+            "values": [
+                {
+                    "when": "${state.checked}",
+                    "opacity":"0"
+                },
+                {
+                    "when": "${!state.checked}",
+                    "opacity": "1"
+                }
+            ]
+        },
+        "playPauseToggleButtonPlayImage": {
+            "description": "style for play Image in the PlayPauseToggleButton layout",
+            "values": [
+                {
+                    "when": "${state.checked}",
+                    "opacity":"1"
+                },
+                {
+                    "when": "${!state.checked}",
+                    "opacity": "0"
+                }
+            ]
+        },
+        "playPauseToggleButtonContainer": {
+            "description": "style for the PlayPauseToggleButton",
+            "values": [
+                {
+                    "when": "${state.focused}",
+                    "opacity":"0"
+                },
+                {
+                    "when": "${!state.focused}",
+                    "opacity": "1"
+                }
+            ]
+        },
+        "playPauseToggleButtonContainerFocused": {
+            "description": "style for the PlayPauseToggleButton - focused mode",
+            "values": [
+                {
+                    "when": "${state.focused}",
+                    "opacity":"1"
+                },
+                {
+                    "when": "${!state.focused}",
+                    "opacity": "0"
+                }
+            ]
+        }
+    },
+    "layouts": {
+        "PlayPauseToggleButton": {
+            "parameters": [
+                "buttonSize",
+                "componentId",
+                "autoplay"
+            ],
+            "item": {
+                "type": "TouchWrapper",
+                "id": "alexaPlayPauseToggleButton",
+                "height":"${buttonSize}",
+                "width":"${buttonSize}",
+                "onPress": {
+                    "type": "Parallel",
+                    "commands":[
+                        {
+                            "type": "SetState",
+                            "componentId": "alexaPlayPauseToggleButton",
+                            "state": "checked",
+                            "value": "${!event.source.value}"
+                        },
+                        {
+                            "when":"${event.source.value}",
+                            "type": "ControlMedia",
+                            "componentId": "${componentId}",
+                            "command": "play"
+                        },
+                        {
+                            "when":"${!event.source.value}",
+                            "type": "ControlMedia",
+                            "componentId": "${componentId}",
+                            "command": "pause"
+                        }
+                    ]
+                },
+                "item": {
+                    "type": "Frame",
+                    "height":"${buttonSize}",
+                    "width":"${buttonSize}",
+                    "style": "highEmphasisIconButton",
+                    "borderRadius": "100vw",
+                    "inheritParentState": true,
+                    "item": {
+                        "type": "Container",
+                        "height":"${buttonSize}",
+                        "width":"${buttonSize}",
+                        "inheritParentState": true,
+                        "items": [
+                            {
+                                "type": "Container",
+                                "height":"${buttonSize}",
+                                "width":"${buttonSize}",
+                                "inheritParentState": true,
+                                "style":"playPauseToggleButtonContainer",
+                                "id":"toggleButtonImages",
+                                "items": [
+                                    {
+                                        "type": "Image",
+                                        "id": "toggleButtonPauseImage",
+                                        "position": "absolute",
+                                        "width":"${buttonSize}",
+                                        "height":"${buttonSize}",
+                                        "source": "@urlPauseIcon",
+                                        "scale": "best-fit",
+                                        "align": "center",
+                                        "style": "playPauseToggleButtonPauseImage",
+                                        "inheritParentState": true
+                                    },
+                                    {
+                                        "type": "Image",
+                                        "id": "toggleButtonPlayImage",
+                                        "position": "absolute",
+                                        "width":"${buttonSize}",
+                                        "height":"${buttonSize}",
+                                        "source": "@urlPlayIcon",
+                                        "scale": "best-fit",
+                                        "align": "center",
+                                        "style": "playPauseToggleButtonPlayImage",
+                                        "inheritParentState": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Container",
+                                "height":"${buttonSize}",
+                                "width":"${buttonSize}",
+                                "inheritParentState": true,
+                                "style":"playPauseToggleButtonContainerFocused",
+                                "id":"toggleButtonImagesFocused",
+                                "items": [
+                                    {
+                                        "type": "Image",
+                                        "id": "toggleButtonPauseImageFocused",
+                                        "position": "absolute",
+                                        "width":"${buttonSize}",
+                                        "height":"${buttonSize}",
+                                        "source": "@urlPauseIconFocused",
+                                        "scale": "best-fit",
+                                        "align": "center",
+                                        "style": "playPauseToggleButtonPauseImage",
+                                        "inheritParentState": true
+                                    },
+                                    {
+                                        "type": "Image",
+                                        "id": "toggleButtonPlayImageFocused",
+                                        "position": "absolute",
+                                        "width":"${buttonSize}",
+                                        "height":"${buttonSize}",
+                                        "source": "@urlPlayIconFocused",
+                                        "scale": "best-fit",
+                                        "align": "center",
+                                        "style": "playPauseToggleButtonPlayImage",
+                                        "inheritParentState": true
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
     "mainTemplate": {
         "parameters": [
             "payload"
@@ -25,126 +249,166 @@
                 "type": "Container",
                 "width": "100vw",
                 "height": "100vh",
-                "alignItems": "center",
                 "items": [
                     {
-                        "type": "Video",
-                        "id": "myVideoPlayer",
-                        "height": "100vh",
+                        "type": "Image",
+                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/thinktwicemain.jpg",
                         "width": "100vw",
+                        "height": "100vh",
                         "scale": "best-fill",
-                        "autoplay": true,
-                        "source": "${payload.thinkTwiceData.properties.video}",
-                        "repeatCount": -1
-                    },
-                    {
-                        "when": "${viewport.shape == 'round'}",
-                        "type": "AlexaTransportControls",
-                        "mediaComponentId": "myVideoPlayer",
-                        "primaryControlSize": "5vw",
-                        "secondaryControlSize": "5vw",
-                        "autoplay": "true",
                         "position": "absolute"
                     },
                     {
+                        "when": "${viewport.shape == 'round'}",
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "items": [
+                                   {
+                                                        "type": "Image",
+                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/way-3157230_1280.png",
+                                                        "height": "100vh",
+                                                        "width": "100vw",
+                                                        "scale": "best-fill",
+                                                        "position": "absolute",
+                                                        "items": {
+                              
+
+                                                            
+                                        "type": "Text",
+                                        "text": "${payload.input.INPUT_DATA.Round}",
+                                        "color": "#FFFFFF",
+                                        "width": "100vw",
+                                        "paddingTop": "15vh",
+                                        "paddingBottom": "7vh",
+                                        "textAlignVertical": "center",
+                                        "alignItems": "center",
+                                        "justifyContent": "center",
+                                        "fontSize": "8vw",
+                                        "fontWeight": "500"
+}
+                                                       
+                                    }]
+                    },
+                         {
                         "when": "${viewport.shape != 'round'}",
                         "type": "Container",
                         "width": "100vw",
                         "height": "100vh",
+                        "border": "black",
+                        "justifyContent": "center",
                         "alignItems": "center",
-                        "position": "absolute",
-                        "items": [
-                            {
-                                "type": "Windows"
-                            },
-                            {
-                                "type": "ControlPanel",
-                                "position": "absolute",
-                                "top": "75vh"
-                            },
+                         "items": [
                             {
                                 "type": "Container",
-                                "width": "11.5vw",
-                                "height": "30vh",
-                                "position": "absolute",
-                                "top": "78vh",
-                                "left": "2vw",
-                                "items": [
+                                "height": "50vh",
+                                "width": "100vw",
+                                "items": [         
                                     {
-                                        "type": "MediumButton",
-                                        "title": "Instructions",
-                                        "color": "@myBlue",
-                                        "arguments": "instructions"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "Container",
-                                "width": "65vw",
-                                "height": "40vh",
-                                "position": "absolute",
-                                "top": "64vh",
-                                "alignItems": "center",
-                                "justifyContent": "center",
-                                "items": [
-                                    {
-                                        "type": "Container",
-                                        "width": "65vw",
-                                        "height": "20vh",
-                                        "alignItems": "center",
-                                        "justifyContent": "center",
-                                        "direction": "row",
-                                        "items": [
-                                          
-                                            {
-                                                "type": "LargeButton",
-                                                "title": "Begin",
-                                                "color": "@myYellow",
-                                                "arguments": "playgame"
-                                            }
-                                        ]
+
+                                        "type": "Video",
+                                        "id": "myVideoPlayer",
+                                        "height": "41vh",
+                                        "width": "100vw",
+                                        "source": "${payload.thinkTwiceData.properties.video}",
+                                        "onPlay": [{
+                                            "type": "SetState",
+                                            "componentId": "alexaPlayPauseToggleButton",
+                                            "state": "checked",
+                                            "value": false
+                                        }],
+                                        "onPause": [{
+                                            "type": "SetState",
+                                            "componentId": "alexaPlayPauseToggleButton",
+                                            "state": "checked",
+                                            "value": true
+                                        }],
+                                        "onEnd": [{
+                                            "type": "SendEvent",
+                                            "arguments": [
+                                                "videoEnded"
+                                            ]
+                                        }]
                                     },
                                     {
-                                        "type": "Frame",
-                                        "width": "65vw",
-                                        "height": "5vh",
-                                        "backgroundColor": "#1774A9",
-                                        "borderRadius": "1vw",
-                                        "item": {
-                                            "type": "Container",
-                                            "width": "65vw",
-                                            "height": "5vh",
-                                            "alignItems": "center",
-                                            "justifyContent": "center",
-                                            "items": [
-                                                {
-                                                    "type": "AlexaTransportControls",
-                                                    "mediaComponentId": "myVideoPlayer",
-                                                    "primaryControlSize": "2vw",
-                                                    "secondaryControlSize": "2vw",
-                                                    "autoplay": "true"
-                                                }
-                                            ]
-                                        }
+                                        "type": "PlayPauseToggleButton",
+                                        "buttonSize": "8vh",
+                                        "componentId": "myVideoPlayer",
+                                        "autoplay": true
                                     }
                                 ]
                             },
-                                                       {
-                                "type": "Container",
-                                "width": "11.5vw",
-                                "height": "30vh",
-                                "position": "absolute",
-                                "top": "78vh",
-                                "left": "87vw",
-                                "items": [
-                                    {
-                                        "type": "MediumButton",
-                                        "title": "Help",
-                                        "color": "@myRed",
-                                        "arguments": "help"
+                            {
+                                "type": "Frame",
+                                "width": "100vw",
+                                "height": "40vh",
+                                "backgroundColor": "rgba(0,0,0,0.05)",
+                                "item": {
+                                    "type": "ScrollView",
+                                    "height": "40vh",
+                                    "width": "100vw",
+                                    "paddingTop": "5vh",
+                                    "item": {
+                                        "type": "Container",
+                                        "height": "40vh",
+                                        "width": "100vw",
+                                        "items": [
+                                            {
+                                                "type": "Container",
+                                                "width": "100vw",
+                                                "height": "40vh",
+                                                "direction": "row",
+                                                "alignItems": "center",
+                                                "justifyContent": "center",
+                                                "items": [
+                                                    {
+                                                        "type": "Container",
+                                                        "width": "40vw",
+                                                        "height": "40vh",
+                                                        "items": [
+                                                            {
+                                                                "type": "Text",
+                                                                "text": "",
+                                                                "fontSize": "5vw",
+                                                                "height": "15vh",
+                                                                "fontWeight": "500",
+                                                                "paddingBottom": "5vh"
+                                                            },
+                                                            {
+                                                                "type": "Sequence",
+                                                                "data": "",
+                                                                "scrollDirection": "vertical",
+                                                                "height": "30vh",
+                                                                "items": [
+                                                                    {
+                                                                        "type": "Text",
+                                                                        "text": "",
+                                                                        "fontSize": "4vw"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Image",
+                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/signbord9.png",
+                                                        "height": "40vh",
+                                                        "width": "40vw",
+                                                        "scale": "best-fill"
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "type": "Text",
+                                                "text": "",
+                                                "fontSize": "5vh",
+                                                "textAlign": "center",
+                                                "width": "100vw",
+                                                "height": "20vh"
+                                            }
+                                        ]
                                     }
-                                    
-                                ]
+                                }
                             }
                         ]
                     }
