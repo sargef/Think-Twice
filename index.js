@@ -110,7 +110,7 @@ const PlayIntentHandler = {
     let reprompt = '';
     let speechArr = [];
 
-     if(level>input.INPUT_DATA.length){
+     if(level>input.INPUT_DATA.length-1){
       speechArr.push(input.COMPLETED_ALL_LEVELS);
       speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
       speechArr.push();
@@ -122,7 +122,7 @@ const PlayIntentHandler = {
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
       
-      if((level>input.INPUT_DATA.length) || (sessionAttributes.level>9 && sessionAttributes.endedSessionCount+1)){
+      if((level>7) || (sessionAttributes.level>7 && sessionAttributes.endedSessionCount+1)){
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
       sessionAttributes.level = 1;
@@ -131,7 +131,20 @@ const PlayIntentHandler = {
       attributesManager.setPersistentAttibutes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
     
-  }
+        }
+     }
+
+     if(level>=input.INPUT_DATA.length-1){
+      speechArr.push(input.COMPLETED_ALL_LEVELS);
+      speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
+      speechArr.push();
+      speechText = await convertArrayToSpeech(speechArr);
+      sessionAttributes.questionCount = 0;
+      sessionAttributes.clueCount=0;
+      sessionAttributes.endedSessionCount += 1;
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
    
     if (supportsAPL(handlerInput)) {
       let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
@@ -288,6 +301,9 @@ const CluesIntentHandler = {
   },
 };
 
+
+
+////
 const NewGameIntentHandler = {
   canHandle(handlerInput) {
     let StartGame = true;
@@ -304,8 +320,30 @@ const NewGameIntentHandler = {
     let reprompt = '';
     let speechArr = [];
     let VIDEO_URL = [];
-       attributesManager.setPersistentAttributes(sessionAttributes);
+
+
+     if(level>input.INPUT_DATA.length-1){
+      speechArr.push(input.COMPLETED_ALL_LEVELS);
+      speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
+      speechArr.push();
+      speechText = await convertArrayToSpeech(speechArr);
+      sessionAttributes.questionCount = 0;
+      sessionAttributes.clueCount=0;
+      sessionAttributes.endedSessionCount += 1;
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
+      
+      if((level>7) || (sessionAttributes.level>7 && sessionAttributes.endedSessionCount+1)){
+      sessionAttributes.questionCount = 0;
+      sessionAttributes.clueCount=0;
+      sessionAttributes.level = 1;
+      sessionAttributes.badge = 0;
+      sessionAttributes.score = 0;
+      attributesManager.setPersistentAttibutes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
+      }
+  }
 
       let round = input.INPUT_DATA[level-1];
       if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || (sessionAttributes.questionCount == 0)){
@@ -406,6 +444,11 @@ const NewGameIntentHandler = {
 };
 
 
+
+/////
+
+
+//////
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
