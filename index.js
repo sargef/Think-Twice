@@ -174,7 +174,7 @@ const PlayIntentHandler = {
         speechText = await convertArrayToSpeech(speechArr)+await convertArrayToSpeech(round.Description);
   
         speechArr = [];
-        speechArr.push(input.START_ANSWERS_MESSAGE_PROMPT);
+        speechArr.push(`${randomSpeech(input.START_ANSWERS_MESSAGE_PROMPT)}`);
         speechArr.push(`Let's now go through the questions from ${round.Round}`);
         speechArr.push(`If you get the answer wrong, i will give you a clue to help. You get 2 available clues per question`);
         speechArr.push(`${round.Subquestion[question].Question}`);
@@ -353,7 +353,7 @@ const NewGameIntentHandler = {
         speechText = await convertArrayToSpeech(speechArr)+await convertArrayToSpeech(round.Description);
   
         speechArr = [];
-        speechArr.push(input.START_ANSWERS_MESSAGE_PROMPT);
+        speechArr.push(`${randomSpeech(input.START_ANSWERS_MESSAGE_PROMPT)}`);
         speechArr.push(`Let's now go through the answers from ${round.Round}`);
         speechArr.push(`If you get the answer wrong, i will give ou a clue, you get 2 available clues per question `);
         speechArr.push(`${round.Subquestion[question].Question}`);
