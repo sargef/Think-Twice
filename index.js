@@ -122,7 +122,7 @@ const PlayIntentHandler = {
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
       
-      if((level>7) || (sessionAttributes.level>7 && sessionAttributes.endedSessionCount+1)){
+      if((level>8) || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount+1)){
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
       sessionAttributes.level = 1;
@@ -334,7 +334,7 @@ const NewGameIntentHandler = {
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
       
-      if((level>7) || (sessionAttributes.level>7 && sessionAttributes.endedSessionCount+1)){
+      if((level>8) || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount+1)){
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
       sessionAttributes.level = 1;
