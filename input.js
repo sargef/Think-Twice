@@ -19,7 +19,14 @@ module.exports = Object.freeze({
     "Let's<say-as interpret-as='interjection'>' Play'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/system-open-ding-3-full.mp3' />"
     ],
     //Game Play
-    START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from this round'</voice>",
+    START_ANSWERS_MESSAGE_PROMPT : 
+    [
+    "<voice name='Matthew'>'I hope you can remember all of the details from this round'</voice>",
+    "<voice name='Matthew'>'I hope you can remember all of the details'</voice>",
+    "<voice name='Matthew'>'I hope you got all of the details from this round'</voice>",
+    "<voice name='Matthew'>'I hope you caught all of the story from this round'</voice>",
+    "<voice name='Matthew'>'I hope you memorized some of the story from this round</voice>",
+    ],
     NEXT_QUESTION_PROMPT :  
     [
     "<voice name='Matthew'>'Next question.'</voice>",
