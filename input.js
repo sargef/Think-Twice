@@ -2,9 +2,10 @@ module.exports = Object.freeze({
 
     SKILL_NAME : "Think Twice",
     ddbTableName : 'think-twice-auz',
+    
 
     //Welcomes
-    WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/welcomenn.mp3' />",
+    WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/welcome150.mp3' />",
     MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Begin to play the game.'</voice>",
     REPROMPT : "<voice name='Matthew'>''</voice>",
     WELCOME_BACK : "<voice name='Matthew'>'Welcome back to Think Twice, Memory Masters Game.'</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/SoundEffects/start-game-countdown-02.mp3' />",
@@ -18,8 +19,15 @@ module.exports = Object.freeze({
     "Let's<say-as interpret-as='interjection'>' Play'</say-as><break strength='strong'/>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/IntroSounds/system-open-ding-3-full.mp3' />"
     ],
     //Game Play
-    START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from the question'</voice>",
-    NEXT_QUESTION_PROMPT : "<voice name='Matthew'>'Lets now move to the next question.'</voice>",
+    START_ANSWERS_MESSAGE_PROMPT : "<voice name='Matthew'>'I hope you can remember all of the details from this round'</voice>",
+    NEXT_QUESTION_PROMPT :  
+    [
+    "<voice name='Matthew'>'Next question.'</voice>",
+    "<voice name='Matthew'>'Time for the next question.'</voice>",
+    "<voice name='Matthew'>'Your next question is.'</voice>",
+    "<voice name='Matthew'>'Here is your next question'</voice>",
+    "<voice name='Matthew'>'Ok, next question.'</voice>"
+    ],
     EARLY_CLUE_PROMPT : "<voice name='Matthew'>'Please play the game to get a clue'</voice>",
     CLUE_PROMPT : "<voice name='Matthew'>'Your clue is'</voice>",
     NO_CLUES_LEFT : "<voice name='Matthew'>'You have no clues left'</voice>",
@@ -45,7 +53,7 @@ module.exports = Object.freeze({
     ],
     //Complete
     COMPLETED_ALL_LEVELS: "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3' />",
-    COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
+    COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud, Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
     CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon. Say New game to start a new game or say stop to finish.'</voice>",
     //Fallback
     FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Think Twice can\'t help you with that. Try guessing the answer or ask for a clue.'</voice>",
@@ -54,12 +62,12 @@ module.exports = Object.freeze({
     FALLBACK_REPROMPT_OUTSIDE_GAME : "<voice name='Matthew'>Say Play to Begin the game or Instructions'</voice>",
     ERROR_HANDLER : "<voice name='Matthew'>'Sorry, I can't understand the command. Please say that again.'</voice>",
     //Finish
-    FINISH : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/stopnn.mp3' />",
+    FINISH : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/stop150.mp3' />",
 
-    GAME_RULES : "https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionsone.mp3" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Instructions/instructionstwo.mp3' />",
+    GAME_RULES : "https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/instructions150.mp3",
      
     //Rules
-    GAME_RULES_REPROMPT : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/helprepromptnn.mp3' />",
+    GAME_RULES_REPROMPT : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/helpreprompt150.mp3' />",
     GAME_PLAY_REPROMPT : [
       "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/gamerepromptfullsound.mp3' />",
       "<voice name ='Matthew'>'If you don't know the answer, try to guess. You will get 2 clues per question if you get it wrong. </voice>"
@@ -68,9 +76,8 @@ module.exports = Object.freeze({
     INPUT_DATA : [
         {
           "Round": "School Swoop",
-          "id" : 1,
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/schoolswoop1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/schoolswoopss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/schoolswoopone150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/schoolswooptwo150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -134,9 +141,8 @@ module.exports = Object.freeze({
         },
           {
           "Round": "Concert Mania",
-          "id": 2,
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/concermaniatwoss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/concertmania150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -199,9 +205,8 @@ module.exports = Object.freeze({
         },
         {
           "Round": "Planetary Attack",
-          "id": 3,
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/bronzemedalnnnn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/planetaryattacklar.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/bronzemedal150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/planetaryattack150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -274,7 +279,7 @@ module.exports = Object.freeze({
          {
           "Round": "Chemistry Quiz",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/chemistryquiz1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/chemistryquiztwoss.mp3' />",
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/chemistryquizone150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/chemistryquiztwo150.mp3' />",
           ],
           "Subquestion": [
             {   
@@ -340,7 +345,7 @@ module.exports = Object.freeze({
           {
           "Round": "Party Trick",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/silvermedalnnnn.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/partytrickss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/silvermedal150.mp3' />" + "<voice name='Matthew'>'Congratulations, you have arrived into the memory champion's category. We will start with a couple of easy levels to give your brain a little rest first, then we will progress to the hardest remaining levels that can ultimately make you a memory champion.</voice>" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/partytrick150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -397,7 +402,7 @@ module.exports = Object.freeze({
                  {
           "Round": "Shopping Shark",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/shoppinsharkss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/shoppingshark150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -460,10 +465,76 @@ module.exports = Object.freeze({
             }
           ]
         },
+                   {
+          "Round": "Diary Dash",
+          "Description": [
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Sounds250/58r8FD5W-diarydashoneroundthree150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/diarydashtwo150.mp3' />"
+          ],
+          "Subquestion": [
+            {   
+              
+                "Question": "<voice name='Matthew'>'When you walk out your front door, you are reminded of this? Just tell me the name of the place'</voice>", 
+                "Answer" : "DayCare",
+                "Clues": [
+                    "Sucking dummies",
+                    "You need to drop off there"
+                ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'The 2nd place you need to visit is. Please just tell me the name of the place.'</voice>",
+              "Answer": "School",
+              "Clues": [
+                "You send your family members there",
+                "Your kids go there to learn"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'The 3rd place in your diary is? Please tell me the place only.'</voice>",
+              "Answer": "Library",
+              "Clues": [
+                "Up into the clouds",
+                "A place you borrow at"
+              ]
+            },
+              {
+              "Question": "<voice name='Matthew'>'Please tell me the 4th place in your diary? Just the name of the place.'</voice>",
+              "Answer": "Car Wash",
+              "Clues": [
+                "Two words",
+                "You clean with it"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'Tell me the 5th place in your diary. Just the name of the place, but two words'</voice>",
+              "Answer": "husbands work",
+              "Clues": [
+                "Your partner or dad spends time at",
+                "a place where you do something"
+              ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'Tell me the 6th place in your diary. Just the name please.'</voice>",
+              "Answer": "Florist",
+              "Clues": [
+                "The old lady handed you some",
+                "smells of perfume"
+              ]
+            },
+        
+            {
+              "Question": "<voice name='Matthew'>'Please tell me the 7th and last place in your diary. Just the name and it is two words'</voice>",
+              "Answer": "Nursing Home",
+              "Clues": [
+                "You mum lives there",
+                "Somewhere you go to visit elderly people"
+              ]
+            }
+          ]
+        },
                  {
           "Round": "Appointment Appeal",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/apptappeal1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/appappealtwoss.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealone150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealtwo150.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -476,7 +547,7 @@ module.exports = Object.freeze({
                 ]
             },
             {
-              "Question": "<voice name='Matthew'>'What was the second appointment. Please tell me the day and item. Example, sunday rump roast'</voice>",
+              "Question": "<voice name='Matthew'>'What was the second appointment. Please tell me the day and item. 3 words. Example, sunday rump roast'</voice>",
               "Answer": "Wednesday Play Group",
               "Clues": [
                 "The little boy says this day to you",
@@ -526,86 +597,13 @@ module.exports = Object.freeze({
             },
              {
               "Question": "<voice name='Matthew'>'Please tell me the eighth and final appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
-              "Answer": "Tuedsay Work",
+              "Answer": "Tuesday Work",
               "Clues": [
                 "Black and white everywhere",
                 "You stand at a busy traffic light in the city and you must choose"
               ]
             }
           ]
-        },
-                 {
-          "Round": "Diary Dash",
-          "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/diarydash1nn.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/SS/skhykecI-diarydashtwoss.mp3' />"
-          ],
-          "Subquestion": [
-            {   
-              
-                "Question": "<voice name='Matthew'>'When you walk out your front door, you are reminded of this? Just tell me the name of the place'</voice>", 
-                "Answer" : "Day Care",
-                "Clues": [
-                    "Sucking dummies",
-                    "You need to drop off there"
-                ]
-            },
-            {
-              "Question": "<voice name='Matthew'>'The 2nd place you need to visit is. Please just tell me the name of the place.'</voice>",
-              "Answer": "School",
-              "Clues": [
-                "You send your family members there",
-                "Your kids go there to learn"
-              ]
-            },
-             {
-              "Question": "<voice name='Matthew'>'The 3rd place in your diary is? Please tell me the place only.'</voice>",
-              "Answer": "Library",
-              "Clues": [
-                "Up into the clouds",
-                "A place you borrow at"
-              ]
-            },
-              {
-              "Question": "<voice name='Matthew'>'Please tell me the 4th place in your diary? Just the name of the place.'</voice>",
-              "Answer": "Car Wash",
-              "Clues": [
-                "Two words",
-                "You clean with it"
-              ]
-            },
-             {
-              "Question": "<voice name='Matthew'>'Tell me the 5th place in your diary. Just the name but four words'</voice>",
-              "Answer": "husbands work",
-              "Clues": [
-                "",
-                ""
-              ]
-            },
-            {
-              "Question": "<voice name='Matthew'>'Tell me the 6th place in your diary. Just the name please.'</voice>",
-              "Answer": "Florist",
-              "Clues": [
-                "The old lady handed you some",
-                "smells of perfume"
-              ]
-            },
-        
-            {
-              "Question": "<voice name='Matthew'>'Please tell me the 7th and last place in your diary. Just the name and it is two words'</voice>",
-              "Answer": "Nursing Home",
-              "Clues": [
-                "You mum lives there",
-                "Somewhere you go to visit elderly people"
-              ]
-            }
-          ]
-        },
-                      {
-          "Round": "Gold",
-          "VideoArray" : "https://thinktwice3.s3-eu-west-1.amazonaws.com/VIDEO/GoldMedalWithFireworksVIDEO.mp4",
-          "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/Medals/GoldMedalAll.mp3' />"
-          ]
         }
-      ]
+    ]
 });
