@@ -3,8 +3,7 @@ module.exports = Object.freeze({
     SKILL_NAME : "Think Twice",
     ddbTableName : 'think-twice-auz',
     
-
-    //Welcomes
+   //Welcomes
     WELCOME : "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/welcome150.mp3' />",
     MAIN_MESSAGE : "<voice name='Matthew'>'Say Play or Begin to play the game.'</voice>",
     REPROMPT : "<voice name='Matthew'>''</voice>",
@@ -60,12 +59,12 @@ module.exports = Object.freeze({
     ],
     //Complete
     COMPLETED_ALL_LEVELS: "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/goldmedalnn.mp3' />",
-    COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud, Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>",
+    COMPLETED_ALL_LEVELS_UPDATE: "<voice name ='Matthew'>'We will update with some new levels for you soon. You should be very proud, Memory Champion.'</voice>"+ "<audio src='https://s3-eu-west-1.amazonaws.com/familyfeuding/MattsAPPLAUSE2.mp3'/>" + "<voice name ='Matthew'>'Please check back again soon for new levels. Say New game to start a new game or say stop to finish'</voice>",
     CHECK_BACK_SOON: "<voice name='Matthew'>'Please check back again soon. Say New game to start a new game or say stop to finish.'</voice>",
     //Fallback
-    FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Think Twice can\'t help you with that. Try guessing the answer or ask for a clue.'</voice>",
+    FALLBACK_MESSAGE_DURING_GAME : "<voice name='Matthew'>'Firstly, please give it a go. Try guessing the answer. If you get it wrong, i will give you a clue, you get 2 clues per question. You never know, you may just get it right and score points'</voice>",
     FALLBACK_REPROMPT_DURING_GAME : "<voice name='Matthew'>'Try guessing the question asked, if you get it wrong, i will give you a clue. You get 2 clues per question.'</voice>",
-    FALLBACK_MESSAGE_OUTSIDE_GAME : "<voice name='Matthew'>'Think Twice Memory Masters skill can\'t help you with that. I will tell you an extroadinary story, You will then be asked 5 Memory Questions about the story. Please say play to start the game or ask for Instructions to learn more. What would you like to do?'</voice>",
+    FALLBACK_MESSAGE_OUTSIDE_GAME : "<voice name='Matthew'>'Think Twice Memory Masters skill can\'t help you with that. I will tell you an extroadinary story, You will then be asked 5 Questions about the story. Please say play to start the game or ask for Instructions to learn more. What would you like to do?'</voice>",
     FALLBACK_REPROMPT_OUTSIDE_GAME : "<voice name='Matthew'>Say Play to Begin the game or Instructions'</voice>",
     ERROR_HANDLER : "<voice name='Matthew'>'Sorry, I can't understand the command. Please say that again.'</voice>",
     //Finish
@@ -213,7 +212,7 @@ module.exports = Object.freeze({
         {
           "Round": "Planetary Attack",
           "Description": [
-            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/bronzemedal150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/planetaryattack150.mp3' />"
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/bronzemedal150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/PlanetaryAttack/planetaryattacklar.mp3' />"
           ],
           "Subquestion": [
             {   
@@ -538,7 +537,81 @@ module.exports = Object.freeze({
             }
           ]
         },
-                 {
+          {
+          "Round": "Appointment Appeal",
+          "Description": [
+            "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealone150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealtwo150.mp3' />"
+          ],
+          "Subquestion": [
+            {   
+              
+                "Question": "<voice name='Matthew'>'Which appointment do you have first. Please say the day of the week and the item. Example, sunday rump roast'</voice>", 
+                "Answer" : "Monday Piano Lessons",
+                "Clues": [
+                    "They sat in a circle listening to",
+                    "A man was playing on one with a silent audience"
+                ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'What was the second appointment. Please tell me the day and item. 3 words. Example, sunday rump roast'</voice>",
+              "Answer": "Wednesday Play Group",
+              "Clues": [
+                "The little boy says this day to you",
+                "Kids go here to play"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'What was the third appointment. Please remember to tell me the day and item. Example, tuesday movie theatre'</voice>",
+              "Answer": "Saturday Car Wash",
+              "Clues": [
+                "It was raining black umbrellas for this memory marker",
+                "You visit this place to clean your car usually on a"
+              ]
+            },
+              {
+              "Question": "<voice name='Matthew'>'Please tell me your forth appointment. Remember to tell me the day and the item. Example, tuesday movie theatre'</voice>",
+              "Answer": "Friday Homeless Shelter",
+              "Clues": [
+                "He is frying an egg on the road",
+                "It is hot and you smell food frying"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'tell me your fifth appointment. Please remember to tell me the day and the item. Example, Monday work day'</voice>",
+              "Answer": "Tuesday shoe Shopping",
+              "Clues": [
+                "The homeless man tell you to do this",
+                "this item will keep you walking and you can pick from lots"
+              ]
+            },
+            {
+              "Question": "<voice name='Matthew'>'What was the sixth appointment. Tell me the day and item. Example, Tuesday work meeting'</voice>",
+              "Answer": "Thursday Wine tasting",
+              "Clues": [
+                "the deer was jumping up and down with something on it's leg",
+                "grapes make this drink"
+              ]
+            },
+        
+            {
+              "Question": "<voice name='Matthew'>'Please tell me the seventh appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
+              "Answer": "Sunday Beach outing",
+              "Clues": [
+                "It skated across the sky",
+                "You felt the cool breeze across your face"
+              ]
+            },
+             {
+              "Question": "<voice name='Matthew'>'Please tell me the eighth and final appointment. the day and item. Example. Sunday Surf Lesson'</voice>",
+              "Answer": "Tuesday Work",
+              "Clues": [
+                "Black and white everywhere",
+                "You stand at a busy traffic light in the city and you must choose"
+              ]
+            }
+          ]
+        },
+                      {
           "Round": "Appointment Appeal",
           "Description": [
             "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealone150.mp3' />" + "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/appappealtwo150.mp3' />"
@@ -614,3 +687,4 @@ module.exports = Object.freeze({
         }
     ]
 });
+ 
