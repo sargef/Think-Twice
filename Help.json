@@ -391,7 +391,7 @@
                                                     },
                                                     {
                                                         "type": "Image",
-                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/signbord9.png",
+                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/learnplaysign.png",
                                                         "height": "40vh",
                                                         "width": "40vw",
                                                         "scale": "best-fill"
