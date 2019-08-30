@@ -91,7 +91,7 @@ const PlayIntentHandler = {
     const sessionAttributes = attributesManager.getSessionAttributes();
 
     if (sessionAttributes.gameState &&  
-        (sessionAttributes.gameState === 'RULES' || sessionAttributes.gameState === 'CLUES')) {
+    (sessionAttributes.gameState === 'INSTRUCTIONS' || sessionAttributes.gameState === 'CLUES' || sessionAttributes === 'HELP')) {
       startGame = true;
     }
 
@@ -122,7 +122,7 @@ const PlayIntentHandler = {
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
       
-      if((level>8) || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount+1)){
+      if(level>9){
       sessionAttributes.questionCount = 0;
       sessionAttributes.clueCount=0;
       sessionAttributes.level = 1;
@@ -132,19 +132,6 @@ const PlayIntentHandler = {
       await attributesManager.savePersistentAttributes();
     
         }
-     }
-
-     if(level>=input.INPUT_DATA.length-1){
-      speechArr.push(input.COMPLETED_ALL_LEVELS);
-      speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
-      speechArr.push();
-      speechText = await convertArrayToSpeech(speechArr);
-      sessionAttributes.questionCount = 0;
-      sessionAttributes.clueCount=0;
-      sessionAttributes.endedSessionCount += 1;
-      sessionAttributes.gameState = 'ENDED';
-      attributesManager.setPersistentAttributes(sessionAttributes);
-      await attributesManager.savePersistentAttributes();
    
     if (supportsAPL(handlerInput)) {
       let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
@@ -167,7 +154,7 @@ const PlayIntentHandler = {
       .getResponse();
     }else{
       let round = input.INPUT_DATA[level-1];
-      if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || sessionAttributes.gameState === 'NEW' ||(sessionAttributes.questionCount == 0)){
+      if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || sessionAttributes.gameState === 'NEW' || (sessionAttributes.questionCount == 0)){
         let question = 0; 
         speechArr.push(`Your Level ${level.toString()} category is ${round.Round}`);
         speechArr.push(`${randomSpeech(input.STARTED)}`);
@@ -301,28 +288,47 @@ const CluesIntentHandler = {
   },
 };
 
-
-
-////
 const NewGameIntentHandler = {
   canHandle(handlerInput) {
-    let StartGame = true;
+    let startGame = false;
+
     const request = handlerInput.requestEnvelope.request;
+    const attributesManager = handlerInput.attributesManager;
+    const sessionAttributes = attributesManager.getSessionAttributes();
+    
+     if (sessionAttributes.gameState &&  
+        (sessionAttributes.gameState === 'INSTRUCTIONS' || sessionAttributes.gameState === 'CLUES' || sessionAttributes === 'HELP')) {
+      startGame = true;
+    }
+
     return request.type === 'IntentRequest' && 
-      (request.intent.name === 'NewGameIntent');
+      (request.intent.name === 'NewGameIntent' ||
+       request.intent.name === 'YesIntent'
+        || handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent');
     },
     async handle(handlerInput) {
     let { requestEnvelope, attributesManager} = handlerInput;
     let sessionAttributes = attributesManager.getSessionAttributes();
     sessionAttributes.gameState = 'PLAY';
-    let level = sessionAttributes.level;
-    let speechText = '';
-    let reprompt = '';
-    let speechArr = [];
-    let VIDEO_URL = [];
-
-
-     if(level>input.INPUT_DATA.length-1){
+    
+      sessionAttributes.questionCount = 0;
+      sessionAttributes.clueCount=0;
+      sessionAttributes.endedSessionCount += 1;
+      sessionAttributes.questionCount = 0;
+      sessionAttributes.clueCount=0;
+      sessionAttributes.level = 1;
+      sessionAttributes.badge = 0;
+      sessionAttributes.score = 0;
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
+    
+      let level = sessionAttributes.level;
+      let speechText = '';
+      let reprompt = '';
+      let speechArr = [];
+    
+      if(level>input.INPUT_DATA.length-1){
       speechArr.push(input.COMPLETED_ALL_LEVELS);
       speechArr.push(input.COMPLETED_ALL_LEVELS_UPDATE);
       speechArr.push();
@@ -333,20 +339,10 @@ const NewGameIntentHandler = {
       sessionAttributes.gameState = 'ENDED';
       attributesManager.setPersistentAttributes(sessionAttributes);
       await attributesManager.savePersistentAttributes();
-      
-      if((level>8) || (sessionAttributes.level>8 && sessionAttributes.endedSessionCount+1)){
-      sessionAttributes.questionCount = 0;
-      sessionAttributes.clueCount=0;
-      sessionAttributes.level = 1;
-      sessionAttributes.badge = 0;
-      sessionAttributes.score = 0;
-      attributesManager.setPersistentAttibutes(sessionAttributes);
-      await attributesManager.savePersistentAttributes();
       }
-  }
-
+      
       let round = input.INPUT_DATA[level-1];
-      if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || (sessionAttributes.questionCount == 0)){
+      if(sessionAttributes.gameState === 'ENDED' || sessionAttributes.gameState === 'CLUES' || sessionAttributes.gameState === 'NEW' ||(sessionAttributes.questionCount == 0)){
         let question = 0; 
         speechArr.push(`Your Level ${level.toString()} category is ${round.Round}`);
         speechArr.push(`${randomSpeech(input.STARTED)}`);
@@ -366,7 +362,7 @@ const NewGameIntentHandler = {
         sessionAttributes.clueCount=0;
         sessionAttributes.score=0;
       } else {
-        let question = 1
+        let question = 1;
         if(requestEnvelope.request.intent.slots && 'answer' in requestEnvelope.request.intent.slots){
           let answer = requestEnvelope.request.intent.slots.answer.value;
           if(answer.toLowerCase() === round.Subquestion[question].Answer.toLowerCase()){
@@ -378,7 +374,7 @@ const NewGameIntentHandler = {
           if (questionCount <= 4){
           let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
       
-              speechArr.push(`${randomSpeech(input.NEXT_QUESTION_PROMPT)}`);
+              speechArr.push(input.NEXT_QUESTION_PROMPT);
               speechArr.push(` ${round.Subquestion[question].Question}`);
         
               sessionAttributes.question = question;
@@ -443,12 +439,43 @@ const NewGameIntentHandler = {
   },
 };
 
+const RepeatIntent = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'RepeatIntent';
+  },
+  async handle(handlerInput) {
+    let { attributesManager} = handlerInput;
+    let sessionAttributes = attributesManager.getSessionAttributes();
+    let speechText;
+    if(sessionAttributes.gameState === 'PLAY' || sessionAttributes.gameState === 'REPEAT'){
+      let speechArr = await getQuestion(attributesManager, sessionAttributes);
+      speechText = await convertArrayToSpeech(speechArr);
+    }
+    
+   if (supportsAPL(handlerInput)) {
+      let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
+        handlerInput.responseBuilder
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            document: require('./Play.json'),
+              datasources: {
+              "thinkTwiceData": {
+                "properties": {
+                  "video": VIDEO_URLS_BY_ROUND_NAME[roundName],
+                }
+              }
+            }
+            
+        });
+    }
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt()
+      .getResponse();
+  },
+};
 
-
-/////
-
-
-//////
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -460,7 +487,7 @@ const HelpIntentHandler = {
   },
   handle(handlerInput) {
   const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/help150.mp3'/> ";
-  const reprompt = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/helpreprompt150.mp3' />";
+  const reprompt =  "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/helpreprompt150.mp3' />";
 
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
@@ -496,7 +523,7 @@ const InstructionsIntentHandler = {
   },
   handle(handlerInput) {
     const speechText = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/instructions150.mp3'/>";
-    const InstructionsReprompt = "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/helpreprompt150.mp3' />";
+    const InstructionsReprompt =  "<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/FINALSOUNDS/helpreprompt150.mp3' />";
 
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
@@ -526,13 +553,13 @@ const StopHandler = {
     const attributesManager = handlerInput.attributesManager;
     const sessionAttributes = attributesManager.getSessionAttributes();
     if (sessionAttributes.gameState && 
-        (sessionAttributes.gameState === 'RULES'|| sessionAttributes.gameState === 'CLUES')) {
+        (sessionAttributes.gameState === 'RULES'|| sessionAttributes.gameState === 'CLUES' || sessionAttributes === 'INSTRUCTIONS' || sessionAttributes === 'HELP')) {
       endGame = true;
     }
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'StopIntent'
       || handlerInput.requestEnvelope.request.intent.name === 'CancelIntent'
-      || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.NoIntent'
+      || handlerInput.requestEnvelope.request.intent.name === 'NoIntent'
 
       || (handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
           && handlerInput.requestEnvelope.request.arguments.length > 0
@@ -675,6 +702,8 @@ const FallbackHandler = {
     return request.type === 'IntentRequest' &&
       (request.intent.name === 'AMAZON.FallbackIntent' ||
         request.intent.name === 'InstructionsIntent' ||
+        request.intent.name === 'DontKnowIntent'  ||
+        request.intent.name  === 'CluesAskIntent' ||
         request.intent.name === 'PlayIntent' ||
         request.intent.name === 'CluesIntent');
   },
@@ -701,8 +730,8 @@ const FallbackHandler = {
         });
     }
   return handlerInput.responseBuilder
-    .speak(input.FALLBACK_MESSAGE_OUTSIDE_GAME)
-    .reprompt(input.FALLBACK_REPROMPT_OUTSIDE_GAME)
+    .speak(input.FALLBACK_MESSAGE_DURING_GAME)
+    .reprompt(input.FALLBACK_REPROMPT_DURING_GAME)
     .getResponse();
     }
     console.log('PLAY');
@@ -747,7 +776,7 @@ async function getClue(attributesManager, sessionAttributes){
    if (questionCount < 5){
     let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
       
-      speechArr.push(input.NEXT_QUESTION_PROMPT);
+      speechArr.push(`${randomSpeech(input.START_ANSWERS_MESSAGE_PROMPT)}`);
       speechArr.push(`${round.Subquestion[question].Question}`);
 
       sessionAttributes.question = question;
@@ -761,7 +790,7 @@ async function getClue(attributesManager, sessionAttributes){
         let badge = (Math.floor((sessionAttributes.score/20)-2));
         sessionAttributes.badge += badge;
         
-        speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to "+level+" level.");
+        speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to level " + level);
         speechArr.push("and You have won " +badge+ " Achievement Awards, your total achievement award count is "+sessionAttributes.badge);
         speechArr.push("Do you want to play level "+level+"?");
 
@@ -774,6 +803,51 @@ async function getClue(attributesManager, sessionAttributes){
     } 
   }
   sessionAttributes.gameState = 'CLUES';
+  attributesManager.setSessionAttributes(sessionAttributes);
+  return speechArr;
+}
+
+async function getQuestion(attributesManager, sessionAttributes){
+  let level = sessionAttributes.level;
+  let round = input.INPUT_DATA[level-1];
+  let question = sessionAttributes.question;
+  
+  let speechArr = [];
+
+    speechArr.push(round.Subquestion[question].Question);
+  } 
+    let questionCount = sessionAttributes.questionCount;
+ 
+   if (questionCount < 5){
+    let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
+      
+      speechArr.push(`${randomSpeech(input.START_ANSWERS_MESSAGE_PROMPT)}`);
+      speechArr.push(`${round.Subquestion[question].Question}`);
+
+      sessionAttributes.question = question;
+      sessionAttributes.questionCount += 1;
+    }else{
+      speechArr.push(input.FOUR_QUESTIONS_COMPLETE);
+      speechArr.push("your score is "+sessionAttributes.score+ " points");
+
+      if(sessionAttributes.score > 50){
+        level += 1;
+        let badge = (Math.floor((sessionAttributes.score/20)-2));
+        sessionAttributes.badge += badge;
+        
+        speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to level " + level);
+        speechArr.push("and You have won " +badge+ " Achievement Awards, your total achievement award count is "+sessionAttributes.badge);
+        speechArr.push("Do you want to play level "+level+"?");
+
+        sessionAttributes.level = level;
+      }else{
+        speechArr.push(input.PLAY_AGAIN_PROMPT);
+      }
+      sessionAttributes.gamesPlayed += 1;
+      sessionAttributes.questionCount = 0;
+    } 
+}
+  sessionAttributes.gameState = 'PLAY';
   attributesManager.setSessionAttributes(sessionAttributes);
   return speechArr;
 }
@@ -823,6 +897,7 @@ exports.handler = skillBuilder
     InstructionsIntentHandler,
     PlayIntentHandler,
     StartOverRequestHandler,
+    RepeatIntent,
     NewGameIntentHandler,
     CluesIntentHandler,
     FallbackHandler,
