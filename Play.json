@@ -311,6 +311,7 @@
                                         "height": "41vh",
                                         "width": "100vw",
                                         "source": "${payload.thinkTwiceData.properties.video}",
+                                        "repeatCount": 2,
                                         "onPlay": [{
                                             "type": "SetState",
                                             "componentId": "alexaPlayPauseToggleButton",
@@ -391,7 +392,7 @@
                                                     },
                                                     {
                                                         "type": "Image",
-                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/SCOREborder3.jpg",
+                                                        "source": "https://thinktwice3.s3-eu-west-1.amazonaws.com/PICTURES/SCOREborder4.jpg",
                                                         "height": "40vh",
                                                         "width": "40vw",
                                                         "scale": "best-fill"
