@@ -449,7 +449,7 @@ const RepeatIntent = {
     let sessionAttributes = attributesManager.getSessionAttributes();
     let speechText;
     if(sessionAttributes.gameState === 'PLAY' || sessionAttributes.gameState === 'REPEAT'){
-      let speechArr = await getQuestion(attributesManager, sessionAttributes);
+      let speechArr = await sessionAttributes.gameState(attributesManager, sessionAttributes);
       speechText = await convertArrayToSpeech(speechArr);
     }
     
@@ -803,51 +803,6 @@ async function getClue(attributesManager, sessionAttributes){
     } 
   }
   sessionAttributes.gameState = 'CLUES';
-  attributesManager.setSessionAttributes(sessionAttributes);
-  return speechArr;
-}
-
-async function getQuestion(attributesManager, sessionAttributes){
-  let level = sessionAttributes.level;
-  let round = input.INPUT_DATA[level-1];
-  let question = sessionAttributes.question;
-  
-  let speechArr = [];
-
-    speechArr.push(round.Subquestion[question].Question);
-  } 
-    let questionCount = sessionAttributes.questionCount;
- 
-   if (questionCount < 5){
-    let question = Math.floor(Math.random() * (round.Subquestion.length - 0) + 0);
-      
-      speechArr.push(`${randomSpeech(input.START_ANSWERS_MESSAGE_PROMPT)}`);
-      speechArr.push(`${round.Subquestion[question].Question}`);
-
-      sessionAttributes.question = question;
-      sessionAttributes.questionCount += 1;
-    }else{
-      speechArr.push(input.FOUR_QUESTIONS_COMPLETE);
-      speechArr.push("your score is "+sessionAttributes.score+ " points");
-
-      if(sessionAttributes.score > 50){
-        level += 1;
-        let badge = (Math.floor((sessionAttributes.score/20)-2));
-        sessionAttributes.badge += badge;
-        
-        speechArr.push("<audio src='https://thinktwice3.s3-eu-west-1.amazonaws.com/NewLouderSounds/NN/magiccash/cash-machine.mp3' />" + "You have progressed to level " + level);
-        speechArr.push("and You have won " +badge+ " Achievement Awards, your total achievement award count is "+sessionAttributes.badge);
-        speechArr.push("Do you want to play level "+level+"?");
-
-        sessionAttributes.level = level;
-      }else{
-        speechArr.push(input.PLAY_AGAIN_PROMPT);
-      }
-      sessionAttributes.gamesPlayed += 1;
-      sessionAttributes.questionCount = 0;
-    } 
-}
-  sessionAttributes.gameState = 'PLAY';
   attributesManager.setSessionAttributes(sessionAttributes);
   return speechArr;
 }
