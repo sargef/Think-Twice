@@ -150,7 +150,7 @@ const PlayIntentHandler = {
    }
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt(reprompt)
+      .reprompt(speechText)
       .getResponse();
     }else{
       let round = input.INPUT_DATA[level-1];
@@ -171,6 +171,7 @@ const PlayIntentHandler = {
         
         sessionAttributes.question = question;
         sessionAttributes.questionCount = 1;
+        sessionAttributes.lastquestion = question;
         sessionAttributes.clueCount=0;
         sessionAttributes.score=0;
       } else {
@@ -246,7 +247,7 @@ const PlayIntentHandler = {
     }
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt(reprompt)
+      .reprompt(speechText)
       .getResponse();
   },
 };
@@ -283,7 +284,7 @@ const CluesIntentHandler = {
     }
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt()
+      .reprompt(speechText)
       .getResponse();
   },
 };
@@ -359,6 +360,7 @@ const NewGameIntentHandler = {
         
         sessionAttributes.question = question;
         sessionAttributes.questionCount = 1;
+        sessionAttributes.lastquestion = question;
         sessionAttributes.clueCount=0;
         sessionAttributes.score=0;
       } else {
@@ -404,13 +406,14 @@ const NewGameIntentHandler = {
             speechArr.push("sorry "+answer+ ` ${randomSpeech(input.ANSWER_WRONG_MESSAGE)}`);
             speechArr = speechArr.concat(await getClue(attributesManager, sessionAttributes));
           }
+
         }else{
           speechArr.push("<voice name='Matthew'>'Alright, lets try again.'</voice>");
           speechArr.push(`Here is your question. ${round.Subquestion[question].Question}`);
         }
         speechText = await convertArrayToSpeech(speechArr);
         reprompt = speechText;
-
+        
       }
     
     attributesManager.setSessionAttributes(sessionAttributes);
@@ -434,48 +437,35 @@ const NewGameIntentHandler = {
     }
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt(reprompt)
+      .reprompt(speechText)
       .getResponse();
   },
 };
 
-const RepeatIntent = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'RepeatIntent';
-  },
-  async handle(handlerInput) {
-    let { attributesManager} = handlerInput;
-    let sessionAttributes = attributesManager.getSessionAttributes();
-    let speechText;
-    if(sessionAttributes.gameState === 'PLAY' || sessionAttributes.gameState === 'REPEAT'){
-      let speechArr = await sessionAttributes.gameState(attributesManager, sessionAttributes);
-      speechText = await convertArrayToSpeech(speechArr);
-    }
-    
-   if (supportsAPL(handlerInput)) {
-      let roundName = input.INPUT_DATA[parseInt(sessionAttributes.level)-1].Round;
-        handlerInput.responseBuilder
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            document: require('./Play.json'),
-              datasources: {
-              "thinkTwiceData": {
-                "properties": {
-                  "video": VIDEO_URLS_BY_ROUND_NAME[roundName],
-                }
-              }
-            }
-            
-        });
-    }
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt()
-      .getResponse();
-  },
-};
+  const RepeatIntent = {
+    canHandle(handlerInput) {
+        console.log("CAN HANDLE - REPEAT INTENT HANDLER");
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+               handlerInput.requestEnvelope.request.intent.name === 'RepeatIntent';
+    },
+    async handle(handlerInput) {
+        console.log("HANDLE - REPEAT INTENT HANDLER");
 
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        var speechText = "";
+        if (sessionAttributes.currentSpeech != undefined) {
+            speechText = sessionAttributes.lastquestion;
+        }
+        else speechText = "I haven't asked a question yet, let's do that now, shall we" + sessionAttributes.question;
+
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .reprompt()
+          .getResponse();
+       },
+    };
+ 
+ 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -576,7 +566,6 @@ const StopHandler = {
     let speechArr = [];
     speechArr.push(input.FINISH);
 
-
     let speechText = input.FINISH;
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder
@@ -647,7 +636,7 @@ const StartOverRequestHandler = {
       }
       return handlerInput.responseBuilder
       .speak(speechOutput)
-      .reprompt(reprompt)
+      .reprompt(speechOutput)
       .getResponse();
   },
 };
