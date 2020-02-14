@@ -1,2 +1,2 @@
-# Think-Twice
-## Under Construction, Enter at your own risk!!
+# Think-Twice APL Alexa Game
+## 
